@@ -1,0 +1,34 @@
+---
+import Footer3 from "../footer-3.astro";
+import { footerItems } from "../../content/globals/footer";
+import { SITE_TITLE_FULL } from "../../consts";
+
+const year = new Date().getFullYear();
+---
+
+<Footer3
+    brandName={SITE_TITLE_FULL}
+    brandHref="/"
+    description="Curated culinary experiences, luxury travel and authentic hospitality that inspire and connect."
+    socials={footerItems.socials}
+    columns={[
+        {
+            title: "Explore",
+            links: footerItems.explore,
+        },
+        {
+            title: "About",
+            links: footerItems.about,
+        },
+        {
+            title: "Support",
+            links: footerItems.support,
+        },
+        {
+            title: "Legal",
+            links: footerItems.legal,
+        },
+    ]}
+    ,
+    copyright={`© ${year} ${SITE_TITLE_FULL}. All rights reserved.`}
+/>

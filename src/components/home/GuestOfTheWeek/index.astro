@@ -1,0 +1,89 @@
+---
+import { Button } from "@/components/ui/button";
+import { Card } from "@/components/ui/card";
+import { Icon } from "@/components/ui/icon";
+import { Image } from "astro:assets";
+
+interface Guest {
+    name: string;
+    image: string;
+    link: string;
+    desc: string;
+}
+
+const guests: Guest[] = [
+    {
+        name: "THE SILO HOTEL",
+        image: "https://the-silo-hotel.capetown-hotels-za.com/data/Pics/OriginalPhoto/17430/1743056/1743056162/pic-the-silo-hotel-cape-town-6.JPEG",
+        link: "/guests/the-silo-hotel",
+        desc: "Redefining luxury hospitality in Cape Town.",
+    },
+];
+---
+
+<section class="bg-muted/30 py-20 lg:py-32 xl:py-40">
+    <div class="container mx-auto max-w-7xl px-4">
+        <div class="grid gap-12 lg:grid-cols-[420px_1fr] lg:items-center">
+            <!-- Content -->
+            <div class="space-y-6">
+                <p
+                    class="text-primary text-sm font-semibold uppercase tracking-[0.2em]"
+                >
+                    Guest of the Week
+                </p>
+
+                <h2
+                    class="font-serif text-4xl font-medium leading-tight md:text-5xl"
+                >
+                    Celebrating People. Sharing Stories.
+                </h2>
+
+                <p class="text-muted-foreground">
+                    Every week we spotlight inspiring individuals and
+                    exceptional businesses shaping the hospitality and tourism
+                    industry.
+                </p>
+
+                <Button
+                    class="rounded-none px-6 py-6 text-sm font-semibold uppercase tracking-[0.1em]"
+                    >Meet our guests</Button
+                >
+            </div>
+
+            <!-- Guest Cards -->
+            <div class="space-y-6">
+                {
+                    guests.map((guest) => (
+                        <Card class="overflow-hidden p-0 shadow-lg">
+                            <div class="grid md:grid-cols-[320px_1fr]">
+                                <img src={guest.image} alt="" />
+
+                                <div class="flex flex-col justify-center p-8">
+                                    <p class="mb-3 text-sm font-semibold uppercase tracking-wider text-primary">
+                                        This Week's Guest
+                                    </p>
+
+                                    <h3 class="font-serif text-3xl font-medium">
+                                        {guest.name}
+                                    </h3>
+
+                                    <p class="mt-4 text-muted-foreground">
+                                        {guest.desc}
+                                    </p>
+
+                                    <div class="mt-6">
+                                        Read Feature
+                                        <Icon
+                                            name="lucide:arrow-right"
+                                            class="h-4 w-4"
+                                        />
+                                    </div>
+                                </div>
+                            </div>
+                        </Card>
+                    ))
+                }
+            </div>
+        </div>
+    </div>
+</section>

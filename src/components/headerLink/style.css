@@ -1,0 +1,11 @@
+a {
+    display: inline-block;
+    text-decoration: none;
+    text-transform: uppercase;
+    letter-spacing: 1.3px;
+}
+
+a.active {
+    font-weight: bolder;
+    text-decoration: underline;
+}

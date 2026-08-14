@@ -1,0 +1,276 @@
+---
+import { Button } from "@/components/ui/button";
+import { Card } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
+import Mainlayout from "../layouts/Mainlayout.astro";
+import Articles4Block from "@/components/articles-4.astro";
+import placeholderImage from "@/assets/placeholder.webp";
+import { Image } from "astro:assets";
+const featuredPost = {
+    title: "Cape Town's Luxury Hospitality Renaissance",
+    category: "Hospitality",
+    image: "https://images.unsplash.com/photo-1516026672322-bc52d61a55d5",
+};
+
+const categories = [
+    "Travel",
+    "Hospitality",
+    "Wine",
+    "Food",
+    "Events",
+    "Luxury",
+];
+
+const articles = [
+    {
+        title: "5 Boutique Hotels Redefining Luxury",
+        category: "Hospitality",
+        readTime: "4 min read",
+    },
+    {
+        title: "Why Culinary Tourism is Thriving",
+        category: "Food",
+        readTime: "6 min read",
+    },
+    {
+        title: "The Ultimate Cape Winelands Guide",
+        category: "Wine",
+        readTime: "8 min read",
+    },
+];
+---
+
+<Mainlayout
+    title="Contact"
+    description="Get in touch with Jetsetting with Janet"
+>
+    <section class="bg-background">
+        <!-- Hero -->
+        <section class="bg-[#080302] border-b py-18">
+            <div class="container mx-auto max-w-7xl px-4">
+                <div class="max-w-3xl">
+                    <p
+                        class="text-primary mb-4 text-sm font-semibold uppercase tracking-[0.3em]"
+                    >
+                        Jetsetting With Janet Journal
+                    </p>
+
+                    <h1
+                        class="font-serif text-5xl text-white leading-tight md:text-7xl"
+                    >
+                        Stories, Destinations & Industry Insights
+                    </h1>
+
+                    <p class="text-muted-foreground mt-6 text-lg">
+                        Discover inspiring stories from the worlds of travel,
+                        hospitality, food, wine and luxury experiences.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Featured -->
+        <section class="py-16">
+            <div class="container mx-auto max-w-7xl px-4">
+                <h2 class="mb-8 text-3xl font-semibold">Featured Story</h2>
+
+                <Card class="overflow-hidden p-0">
+                    <div class="grid lg:grid-cols-2">
+                        <img src={featuredPost.image} alt="" />
+
+                        <div class="flex flex-col justify-center p-10">
+                            <Badge class="w-fit">
+                                {featuredPost.category}
+                            </Badge>
+
+                            <h3 class="font-serif mt-4 text-4xl">
+                                {featuredPost.title}
+                            </h3>
+
+                            <p class="text-muted-foreground mt-4">
+                                An inside look at the hotels, chefs, visionaries
+                                and experiences shaping the future of luxury
+                                travel.
+                            </p>
+
+                            <Button
+                                class="mt-6 w-fit rounded-none uppercase tracking-[0.12em]"
+                            >
+                                Read Article
+                            </Button>
+                        </div>
+                    </div>
+                </Card>
+            </div>
+        </section>
+
+        <!-- Categories -->
+        <section class="bg-muted/30 py-20">
+            <div class="container mx-auto max-w-7xl px-4">
+                <div class="mb-8 flex items-center justify-between">
+                    <h2 class="text-3xl font-semibold">Browse By Category</h2>
+                </div>
+
+                <div class="grid gap-4 md:grid-cols-3 lg:grid-cols-6">
+                    {
+                        categories.map((category) => (
+                            <Card class="cursor-pointer p-6 text-center transition hover:shadow-md">
+                                <h3 class="font-medium">{category}</h3>
+                            </Card>
+                        ))
+                    }
+                </div>
+            </div>
+        </section>
+
+        <!-- Trending -->
+        <section class="py-20">
+            <div class="container mx-auto max-w-7xl px-4">
+                <div class="mb-8 flex items-center justify-between">
+                    <h2 class="text-3xl font-semibold">Trending Now</h2>
+
+                    <select class="rounded-md border px-4 py-2">
+                        <option>Most Popular</option>
+                        <option>Newest</option>
+                        <option>Most Read</option>
+                    </select>
+                </div>
+
+                <div class="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+                    {
+                        articles.map((article) => (
+                            <Card class="p-7">
+                                <div class="space-y-4">
+                                    <Badge>{article.category}</Badge>
+
+                                    <h3 class="text-xl font-semibold">
+                                        {article.title}
+                                    </h3>
+
+                                    <p class="text-muted-foreground text-sm">
+                                        {article.readTime}
+                                    </p>
+
+                                    <Button
+                                        variant="outline"
+                                        class="rounded-none uppercase tracking-[0.1em]"
+                                    >
+                                        Read More
+                                    </Button>
+                                </div>
+                            </Card>
+                        ))
+                    }
+                </div>
+            </div>
+        </section>
+
+        <!-- Latest Articles -->
+        <div class="container mx-auto max-w-7xl py-20">
+            <Articles4Block
+                title="Latest Articles"
+                description=""
+                articles={[
+                    {
+                        category: "Process",
+                        title: "Component launch checklist",
+                        description:
+                            "A step-by-step guide for shipping new components to production without breaking existing pages.",
+                        author: {
+                            image: placeholderImage,
+                            initials: "SV",
+                            name: "Sil Veltman",
+                            date: "May 4, 2026",
+                        },
+                    },
+                    {
+                        category: "Design",
+                        title: "Editorial pages that convert",
+                        description:
+                            "How to balance storytelling with clear calls to action in content-heavy layouts.",
+                        author: {
+                            image: placeholderImage,
+                            initials: "JD",
+                            name: "Jane Doe",
+                            date: "Apr 27, 2026",
+                        },
+                    },
+                    {
+                        category: "Workflow",
+                        title: "A calmer design system workflow",
+                        description:
+                            "Reduce churn and keep your team focused by treating updates as editorial work.",
+                        author: {
+                            image: placeholderImage,
+                            initials: "MR",
+                            name: "Mark Reed",
+                            date: "Apr 20, 2026",
+                        },
+                    },
+                    {
+                        category: "Opinion",
+                        title: "When to ship blocks over templates",
+                        description:
+                            "Templates lock you in. Blocks give teams the flexibility to compose pages that match their content.",
+                        author: {
+                            image: placeholderImage,
+                            initials: "AL",
+                            name: "Amy Lin",
+                            date: "Apr 13, 2026",
+                        },
+                    },
+                    {
+                        category: "Guide",
+                        title: "Structuring content for reuse",
+                        description:
+                            "How to think about content architecture when building with composable section primitives.",
+                        author: {
+                            image: placeholderImage,
+                            initials: "SV",
+                            name: "Sil Veltman",
+                            date: "Apr 6, 2026",
+                        },
+                    },
+                    {
+                        category: "Launch",
+                        title: "Source-first development",
+                        description:
+                            "Ship components as source files and let teams pull exactly what they need.",
+                        author: {
+                            image: placeholderImage,
+                            initials: "JD",
+                            name: "Jane Doe",
+                            date: "Mar 30, 2026",
+                        },
+                    },
+                ]}
+            />
+        </div>
+
+        <!-- Newsletter -->
+        <section class="py-24">
+            <div class="container mx-auto max-w-4xl px-4">
+                <Card class="text-center">
+                    <h2 class="font-serif text-4xl">Stay Inspired</h2>
+
+                    <p class="text-muted-foreground mt-4">
+                        Receive the latest travel stories, hospitality insights
+                        and exclusive experiences.
+                    </p>
+
+                    <div class="mt-8 flex flex-col gap-4 md:flex-row">
+                        <input
+                            type="email"
+                            placeholder="Enter your email"
+                            class="flex-1 rounded-none border px-4 py-3"
+                        />
+
+                        <Button class="rounded-none uppercase tracking-[0.1em]">
+                            Subscribe
+                        </Button>
+                    </div>
+                </Card>
+            </div>
+        </section>
+    </section>
+</Mainlayout>

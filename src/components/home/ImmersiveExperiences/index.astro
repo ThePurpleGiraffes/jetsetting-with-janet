@@ -1,0 +1,90 @@
+---
+import { Image } from "astro:assets";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent } from "@/components/ui/card";
+
+import chefsTableImg from "../../../assets/chef-table.png";
+import wineExperiencesImg from "../../../assets/wine-experiences.png";
+import privateEventsImg from "../../../assets/private-events.png";
+
+const pillars = [
+    {
+        name: "CHEF'S TABLE",
+        img: chefsTableImg,
+        desc: "Exclusive dining curated by top chefs.",
+    },
+    {
+        name: "WINE EXPERIENCES",
+        img: wineExperiencesImg,
+        desc: "Curated tasting & storytelling evenings.",
+    },
+    {
+        name: "PRIVATE EVENTS",
+        img: privateEventsImg,
+        desc: "Bespoke experiences for any occasion.",
+    },
+];
+---
+
+<section class="bg-muted/30 py-20 lg:py-16 xl:py-20">
+    <div class="container mx-auto max-w-7xl px-4">
+        <div class="grid gap-12 lg:grid-cols-[500px_1fr] lg:items-center">
+            <!-- Content -->
+            <div class="space-y-6">
+                <p
+                    class="text-primary text-sm font-semibold uppercase tracking-widest"
+                >
+                    Immersive Culinary Experiences
+                </p>
+
+                <h2
+                    class="font-serif text-4xl font-medium leading-tight md:text-5xl"
+                >
+                    Extraordinary Dining, Unforgettable Moments.
+                </h2>
+
+                <p class="text-muted-foreground">
+                    From intimate chef's tables to exclusive culinary journeys,
+                    our experiences are designed to delight the senses and
+                    celebrate culture, connection and exceptional hospitality.
+                </p>
+
+                <a href="/experiences">
+                     <Button
+                        class="rounded-none px-6 py-6 text-sm font-semibold uppercase tracking-[0.1em]"
+                    >
+                        Discover Experiences
+                    </Button>
+                </a>
+               
+            </div>
+
+            <!-- Experience Cards -->
+            <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+                {
+                    pillars.map((pillar) => (
+                        <Card class="group relative h-[360px] overflow-hidden border-0 p-0 shadow-lg">
+                            <Image
+                                src={pillar.img}
+                                alt={""}
+                                class="absolute inset-0 h-full w-full object-cover transition duration-500 group-hover:scale-105"
+                            />
+
+                            <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-transparent" />
+
+                            <div class="absolute bottom-0 z-10 p-5 text-white">
+                                <h3 class="mb-2 text-lg font-semibold tracking-wide">
+                                    {pillar.name}
+                                </h3>
+
+                                <p class="text-sm text-white/80">
+                                    {pillar.desc}
+                                </p>
+                            </div>
+                        </Card>
+                    ))
+                }
+            </div>
+        </div>
+    </div>
+</section>

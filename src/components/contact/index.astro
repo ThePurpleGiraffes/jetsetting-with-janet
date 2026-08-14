@@ -1,0 +1,49 @@
+---
+import Contact3 from "../contact-3.astro";
+import placeholderImage from "../../assets/placeholder.webp";
+---
+
+<Contact3
+    title="Let's Connect"
+    description="Whether you're interested in partnering with Jetsetting with Janet, featuring your hospitality brand, appearing on the podcast, or joining one of our curated experiences, we'd love to hear from you."
+    contactItems={[
+        {
+            icon: "mdi:email-outline",
+            title: "Email",
+            description: "info@jetsettingwithjanet.com",
+            href: "mailto:info@jetsettingwithjanet.com",
+        },
+        {
+            icon: "mdi:map-marker-outline",
+            title: "Location",
+            description: "Cape Town, South Africa",
+        },
+        {
+            icon: "mdi:podcast",
+            title: "Podcast",
+            description: "Guest and collaboration enquiries",
+            href: "/podcast",
+        },
+        {
+            icon: "mdi:briefcase-outline",
+            title: "Partnerships",
+            description: "Tourism and hospitality collaborations",
+            href: "/partners",
+        },
+    ]}
+    form={{
+        legend: "Contact Form",
+        nameLabel: "Full Name",
+        namePlaceholder: "Enter your name",
+        emailLabel: "Email Address",
+        emailPlaceholder: "Enter your email",
+        messageLabel: "Message",
+        messagePlaceholder:
+            "Tell us about your enquiry, partnership opportunity, travel experience, or collaboration idea.",
+        actionLabel: "Send Message",
+    }}
+    image={{
+        src: placeholderImage,
+        alt: "Luxury travel and hospitality experience",
+    }}
+/>

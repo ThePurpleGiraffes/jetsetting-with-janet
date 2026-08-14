@@ -1,0 +1,20 @@
+---
+import Products5Block from "../components/products-5.astro";
+import MainLayout from "../layouts/Mainlayout.astro";
+import { experiences } from "@/content/page/experiences/products";
+---
+
+<MainLayout
+	title="Jetsetting With Janet"
+	description="Curated culinary experiences, luxury travel and authentic hospitality stories."
+>
+	<Products5Block
+		badge="Featured"
+		title="Immersive Culinary Experiences"
+		buttons={[]}
+		description="Curated culinary experiences designed to
+inspire, connect, and elevate your team event
+into something unforgettable."
+		products={experiences.products}
+	/>
+</MainLayout>

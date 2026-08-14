@@ -1,0 +1,48 @@
+<!-- ---
+import { Image } from "astro:assets";
+import { SITE_TITLE } from "../../consts";
+import HeaderLink from "../headerLink/HeaderLink.astro";
+import "./style.css";
+
+interface Props {
+	className?: string;
+}
+
+const { className = "" } = Astro.props;
+---
+
+<NonBodyContainer class="cont">
+	<header class:list={["header", className]}>
+		<nav>
+			<div class="head">
+				<a href="/"
+					><img
+						src="https://cdn.iono.fm/files/p3329/logo_3329_20250905_204654_1400.jpeg"
+						width={100}
+						alt={SITE_TITLE}
+					/></a
+				>
+				<BaseIcon
+					style="display: none"
+					class="closeBtn"
+					name="mdi:close"
+					size={32}
+				/>
+			</div>
+
+			<div class="internal-links">
+				<HeaderLink class="link" href="/">Home</HeaderLink>
+				<HeaderLink class="link" href="/experiences"
+					>Experiences</HeaderLink
+				>
+				<HeaderLink class="link" href="/podcast">Podcast</HeaderLink>
+				<HeaderLink class="link" href="/blog">Blog</HeaderLink>
+				<HeaderLink class="link" href="/partners">Partners</HeaderLink>
+				<HeaderLink class="link" href="/contact">Contact</HeaderLink>
+			</div>
+			<div class="cta-link">
+				<a href="/podcast"> Book an Immersive Culinary Experience </a>
+			</div>
+		</nav>
+	</header>
+</NonBodyContainer> -->

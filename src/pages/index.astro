@@ -1,0 +1,50 @@
+---
+import MainLayout from "../layouts/Mainlayout.astro";
+import { SITE_DESCRIPTION, SITE_TITLE, SITE_TITLE_FULL } from "../consts";
+
+import Hero4 from "../components/hero-4.astro";
+import heroImage from "@/assets/home-hero-banner.png";
+import ImmersiveExperiences from "../components/home/ImmersiveExperiences/index.astro";
+import Podcast from "../components/home/Podcasts/index.astro";
+import GuestOfTheWeek from "../components/home/GuestOfTheWeek/index.astro";
+import TravelInspiration from "../components/home/TravelInspiration/index.astro";
+import Partners from "../components/home/Partners/index.astro";
+---
+
+<MainLayout
+	title="Jetsetting With Janet"
+	description="Curated culinary experiences, luxury travel and authentic hospitality stories."
+>
+	<Hero4
+		title="Travel. Taste."
+		description="Curated culinary experiences, luxury travel and authentic hospitality stories that inspire and connect."
+		features={[
+			"Luxury Travel",
+			"Hospitality Stories",
+			"Curated Experiences",
+			"Podcast Features",
+			"Industry Partnerships",
+		]}
+		buttons={[
+			{
+				label: "Explore Experiences",
+				href: "/experiences",
+			},
+			{
+				label: "Listen To The Podcast",
+				href: "/podcast",
+				variant: "secondary",
+			},
+		]}
+		image={{
+			src: heroImage,
+			alt: "Luxury travel and hospitality experience",
+		}}
+	/>
+
+	<ImmersiveExperiences />
+	<Podcast />
+	<GuestOfTheWeek />
+	<TravelInspiration />
+	<Partners />
+</MainLayout>

@@ -1,0 +1,223 @@
+---
+const iconSize = 26;
+
+const OfferingCardList = [
+    {
+        Content: {
+            Title: "Corporate Teams",
+            Icon: {
+                name: "tabler:users-group",
+                size: iconSize,
+                color: "#fff",
+            },
+        },
+    },
+    {
+        Content: {
+            Title: "Executive Groups",
+            Icon: {
+                name: "lucide:user-round",
+                size: iconSize,
+                color: "fff",
+            },
+        },
+    },
+    {
+        Content: {
+            Title: "Tourism Delegates",
+            Icon: {
+                name: "tabler:briefcase",
+                size: iconSize,
+                color: "fff",
+            },
+        },
+    },
+    {
+        Content: {
+            Title: "Luxury Brands",
+            Icon: {
+                name: "tabler:diamond",
+                size: iconSize,
+                color: "fff",
+            },
+        },
+    },
+    {
+        Content: {
+            Title: "Friends & Family Events",
+            Icon: {
+                name: "tabler:confetti",
+                size: iconSize,
+                color: "fff",
+            },
+        },
+    },
+    {
+        Content: {
+            Title: "MICE Groups",
+            Icon: {
+                name: "tabler:users",
+                size: iconSize,
+                color: "fff",
+            },
+        },
+    },
+    {
+        Content: {
+            Title: "Teambuilding",
+            Icon: {
+                name: "tabler:network",
+                size: iconSize,
+                color: "fff",
+            },
+        },
+    },
+    {
+        Content: {
+            Title: "Conferences & Incentive Travel groups",
+            Icon: {
+                name: "tabler:presentation",
+                size: iconSize,
+                color: "fff",
+            },
+        },
+    },
+];
+
+const OfferingDesignCardList = [
+    {
+        Content: {
+            Title: "Collaboration",
+            Icon: {
+                name: "tabler:friends",
+                size: iconSize,
+                color: "#fff",
+            },
+        },
+    },
+    {
+        Content: {
+            Title: "Food Culture",
+            Icon: {
+                name: "tabler:leaf",
+                size: iconSize,
+                color: "fff",
+            },
+        },
+    },
+    {
+        Content: {
+            Title: "Networking",
+            Icon: {
+                name: "tabler:hierarchy-2",
+                size: iconSize,
+                color: "fff",
+            },
+        },
+    },
+    {
+        Content: {
+            Title: "Hospitality Excellence",
+            Icon: {
+                name: "tabler:bell",
+                size: iconSize,
+                color: "fff",
+            },
+        },
+    },
+];
+---
+
+<!doctype html>
+<html>
+    <style>
+        .container {
+            padding: 80px 0;
+            max-width: 960px;
+            display: flex;
+            gap: 1.5rem;
+            flex-wrap: wrap;
+            text-align: center;
+            width: 100%;
+            margin: 0 auto;
+        }
+        .cards-container {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1.5rem;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            flex-wrap: wrap;
+            padding: 2rem 0;
+        }
+        .container p {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        h5 {
+            font-size: 2rem;
+            line-height: 1.2;
+            font-weight: 500;
+            color: var(--black);
+        }
+        h6 {
+            font-size: 1.6rem;
+            line-height: 1.2;
+            font-weight: 500;
+            color: var(--accent);
+        }
+        .card {
+            max-width: calc(25% - 1.5rem);
+        }
+        h3 {
+            font-size: 2.2rem;
+        }
+    </style>
+
+    <body>
+        <div class="container">
+            <h5
+                style="text-align: center; font-size: 42px; letter-spacing: 0.02em; width: 100%; font-family: 'Playfair Display', serif;
+				font-style: italic; "
+            >
+                Event Offerings
+            </h5>
+
+            <p>
+                The events combine hands-on cooking, cultural appreciation,
+                luxury presentation, storytelling, and destination and culinary
+                tourism.
+            </p>
+            <!-- <div class="cards-container">
+                {
+                    OfferingCardList.map((card) => (
+                        <BaseCard
+                            style="box-shadow: 4px 5px 4px rgba(0, 0, 0, 0.01);"
+                            TitleSize={18}
+                            BaseColor={"#a48137"}
+                            Content={card.Content}
+                        />
+                    ))
+                }
+            </div>
+            <h6 style="color: var(--accent); text-align: center; width: 100%;">
+                Experiences are designed around
+            </h6>
+
+            <div class="cards-container">
+                {
+                    OfferingDesignCardList.map((card) => (
+                        <BaseCard
+                            style="box-shadow: 4px 5px 4px rgba(0, 0, 0, 0.01);"
+                            TitleSize={18}
+                            Background={"#242013"}
+                            BaseColor={"#242013"}
+                            Content={card.Content}
+                        />
+                    ))
+                }
+            </div> -->
+        </div>
+    </body>
+</html>

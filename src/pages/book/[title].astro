@@ -1,0 +1,675 @@
+---
+import { experiences } from "../../content/page/experiences/products";
+import Mainlayout from "../../layouts/Mainlayout.astro";
+import { Image } from "astro:assets";
+import { Icon } from "astro-icon/components";;
+import {
+    Select,
+    SelectContent,
+    SelectGroup,
+    SelectItem,
+    SelectTrigger,
+    SelectValue,
+} from "@/components/ui/select";
+
+export function getStaticPaths() {
+    return experiences.products.map((product) => ({
+        params: {
+            title: product.title,
+        },
+        props: {
+            product,
+        },
+    }));
+}
+const { product } = Astro.props;
+
+const tomorrow = new Date();
+tomorrow.setDate(tomorrow.getDate() + 1);
+const minDate = tomorrow.toISOString().split("T")[0];
+---
+
+<Mainlayout
+    title="Contact"
+    description="Get in touch with Jetsetting with Janet"
+>
+    <div class="container mx-auto max-w-7xl px-4 py-12">
+        <div class="mb-8">
+            <a
+                href="/experiences"
+                class="mb-4 inline-flex items-center gap-2 text-sm text-muted-foreground transition hover:text-foreground"
+            >
+                <Icon name="lucide:arrow-left" />
+                Back to Experiences
+            </a>
+
+            <h1 class="text-4xl font-bold">Book Your Experience</h1>
+
+            <p class="mt-2 text-muted-foreground">
+                Complete your booking details below.
+            </p>
+        </div>
+
+        <div class="grid gap-8 lg:grid-cols-3">
+            <!-- Product Summary -->
+            <div class="lg:col-span-1">
+                <div class="rounded-xl border bg-white p-6 shadow-sm">
+                    {product.image != null ? (<Image
+                        src={product.image.src}
+                        alt={product.image.alt}
+                        class="aspect-4/4 w-full object-cover transition-transform duration-300 group-hover/product:scale-105"
+                    />) : (null)}
+                    
+                    <h2 class="text-xl font-semibold">
+                        {product.title}
+                    </h2>
+
+                    <p class="mt-3 text-sm text-muted-foreground">
+                        {product.description}
+                    </p>
+
+                    <div class="mt-6 border-t pt-4">
+                        <div class="flex justify-between">
+                            <span>Experience</span>
+                            <span class="font-medium">{product.title}</span>
+                        </div>
+
+                        <div class="mt-4">
+                            <label class="mb-2 block text-sm font-medium">
+                                Number of Guests
+                            </label>
+
+                            <Select
+                                id="guest-count"
+                                name="guests"
+                                defaultValue="1"
+                                class="w-[180px]"
+                            >
+                                <SelectTrigger>
+                                    <SelectValue />
+                                </SelectTrigger>
+
+                                <SelectContent>
+                                    <SelectGroup>
+                                        <SelectItem value="1">1</SelectItem>
+                                        <SelectItem value="2">2</SelectItem>
+                                        <SelectItem value="3">3</SelectItem>
+                                        <SelectItem value="4">4</SelectItem>
+                                        <SelectItem value="5">5</SelectItem>
+                                        <SelectItem value="6">6</SelectItem>
+                                        <SelectItem value="7">7</SelectItem>
+                                        <SelectItem value="8">8</SelectItem>
+                                        <SelectItem value="9">9</SelectItem>
+                                        <SelectItem value="10">10</SelectItem>
+                                        <SelectItem value="11">11</SelectItem>
+                                        <SelectItem value="12">12</SelectItem>
+                                        <SelectItem value="13">13</SelectItem>
+                                        <SelectItem value="14">14</SelectItem>
+                                        <SelectItem value="15">15</SelectItem>
+                                    </SelectGroup>
+                                </SelectContent>
+                            </Select>
+                        </div>
+
+                        <div class="mt-4 flex justify-between">
+                            <span>Price per Person</span>
+                            <span>
+                                {product.price.currency}
+                                {product.price.value}.00
+                            </span>
+                        </div>
+
+                        <input
+                            type="hidden"
+                            id="guest-count-hidden"
+                            name="guests"
+                            value="1"
+                        />
+
+                        <div
+                            class="mt-3 flex justify-between text-lg font-bold"
+                        >
+                            <span>Total</span>
+
+                            <span id="summary-total">
+                                {product.price.currency}
+                                {product.price.value}.00
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Booking Form -->
+            <div class="lg:col-span-2">
+                <div class="rounded-xl border bg-white p-6 shadow-sm">
+                    <h2 class="mb-6 text-2xl font-semibold">Booking Details</h2>
+
+                    <form id="booking-form" class="space-y-6">
+                        <!-- Date -->
+
+                        <div>
+                            <label class="mb-2 block text-sm font-medium">
+                                Select Date
+                            </label>
+
+                            <input
+                                id="selected-date"
+                                type="hidden"
+                                name="date"
+                            />
+
+                            <div class="mb-4 flex items-center justify-between">
+                                <button
+                                    id="prev-dates"
+                                    type="button"
+                                    class="rounded-lg border px-4 py-2"
+                                >
+                                    ←
+                                </button>
+
+                                <span id="date-range-label" class="font-medium"
+                                ></span>
+
+                                <button
+                                    id="next-dates"
+                                    type="button"
+                                    class="rounded-lg border px-4 py-2"
+                                >
+                                    →
+                                </button>
+                            </div>
+
+                            <div
+                                id="date-grid"
+                                class="grid grid-cols-2 gap-2 md:grid-cols-4 lg:grid-cols-5"
+                            >
+                            </div>
+                        </div>
+
+                        <!-- Location -->
+                        <div>
+                            <label class="mb-2 block text-sm font-medium">
+                                Location
+                            </label>
+
+                            <p class="mt-2 text-sm text-muted-foreground">
+                                All experiences are hosted at the International
+                                Hotel School (IHS).
+                            </p>
+
+                            <select
+                                id="location"
+                                class="w-full rounded-lg border px-4 py-3 mt-2"
+                            >
+                                <option value="">Select location</option>
+                                <option value="cape-town">Cape Town</option>
+                                <option value="johannesburg"
+                                    >Johannesburg</option
+                                >
+                                <option value="durban">Durban</option>
+                                <option value="pretoria">Pretoria</option>
+                            </select>
+
+                            <div
+                                id="location-info"
+                                class="mt-4 rounded-lg border bg-muted/30 px-4 py-3"
+                            >
+                                Select a location to view venue details.
+                            </div>
+                        </div>
+
+                        <!-- Time Slot -->
+                        <div>
+                            <label class="mb-2 block text-sm font-medium">
+                                Available Time Slot
+                            </label>
+
+                            <select
+                                id="time-slot"
+                                class="w-full rounded-lg border px-4 py-3"
+                            >
+                                <option>Select a time</option>
+                                <option>08:00</option>
+                                <option>08:30</option>
+                                <option>09:00</option>
+                                <option>09:30</option>
+                                <option>10:00</option>
+                                <option>10:30</option>
+                                <option>11:00</option>
+                                <option>11:30</option>
+                                <option>12:00</option>
+                                <option>12:30</option>
+                                <option>13:00</option>
+                                <option>13:30</option>
+                                <option>14:00</option>
+                                <option>14:30</option>
+                                <option>15:00</option>
+                            </select>
+                        </div>
+
+                        <!-- Customer Details -->
+                        <div class="grid gap-4 md:grid-cols-2">
+                            <div>
+                                <label class="mb-2 block text-sm font-medium">
+                                    Full Name
+                                </label>
+
+                                <input
+                                    id="full-name"
+                                    type="text"
+                                    placeholder="John Smith"
+                                    class="w-full rounded-lg border px-4 py-3"
+                                />
+                            </div>
+
+                            <div>
+                                <label class="mb-2 block text-sm font-medium">
+                                    Mobile Number
+                                </label>
+
+                                <input
+                                    id="mobile-number"
+                                    type="tel"
+                                    placeholder="+27..."
+                                    class="w-full rounded-lg border px-4 py-3"
+                                />
+                            </div>
+                        </div>
+
+                        <div>
+                            <label class="mb-2 block text-sm font-medium">
+                                Email Address
+                            </label>
+
+                            <input
+                                id="email-address"
+                                type="email"
+                                placeholder="john@example.com"
+                                class="w-full rounded-lg border px-4 py-3"
+                            />
+                        </div>
+
+                        <!-- Total -->
+                        <div class="rounded-lg bg-muted p-4">
+                            <div
+                                class="flex justify-between text-lg font-semibold"
+                            >
+                                <span>Total</span>
+                                <span id="checkout-total">
+                                    {product.price.currency}
+                                    {product.price.value}.00
+                                </span>
+                            </div>
+                        </div>
+
+                        <button
+                            id="continue-btn"
+                            type="submit"
+                            disabled
+                            class="w-full rounded-lg bg-black px-6 py-3 font-medium text-white transition hover:opacity-90 disabled:cursor-not-allowed disabled:opacity-50"
+                        >
+                            Reserve my experience
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const locationSelect = document.getElementById(
+            "location",
+        ) as HTMLSelectElement | null;
+
+        const locationInfo = document.getElementById(
+            "location-info",
+        ) as HTMLDivElement | null;
+
+        const mapLink = document.getElementById(
+            "map-link",
+        ) as HTMLAnchorElement | null;
+
+        const venues: Record<string, { query: string }> = {
+            "cape-town": {
+                query: "International Hotel School Cape Town",
+            },
+            johannesburg: {
+                query: "International Hotel School Johannesburg",
+            },
+            durban: {
+                query: "International Hotel School Durban",
+            },
+            pretoria: {
+                query: "International Hotel School Pretoria",
+            },
+        };
+
+        locationSelect?.addEventListener("change", (e) => {
+            const target = e.currentTarget;
+
+            if (!(target instanceof HTMLSelectElement)) return;
+
+            const selected = venues[target.value];
+
+            if (!selected || !locationInfo) return;
+
+            locationInfo.innerHTML = `
+            <iframe
+        src="https://maps.google.com/maps?q=${encodeURIComponent(selected.query)}&t=&z=15&ie=UTF8&iwloc=&output=embed"
+            width="100%"
+            height="300"
+            style="border:0;"
+            loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade"
+        ></iframe>
+    `;
+        });
+    </script>
+
+    <script
+        define:vars={{
+            price: product.price.value,
+            currency: product.price.currency,
+        }}
+    >
+        function initializeGuestPricing() {
+            const summaryTotal = document.getElementById("summary-total");
+            const checkoutTotal = document.getElementById("checkout-total");
+
+            function updatePrice() {
+                const guestInput = document.querySelector(
+                    'input[name="guests"]',
+                );
+
+                if (!(guestInput instanceof HTMLInputElement)) {
+                    return;
+                }
+
+                const guests = Number(guestInput.value || "1");
+
+                const total = `${currency}${(price * guests).toFixed(2)}`;
+
+                if (summaryTotal) {
+                    summaryTotal.textContent = total;
+                }
+
+                if (checkoutTotal) {
+                    checkoutTotal.textContent = total;
+                }
+            }
+
+            const observer = new MutationObserver(updatePrice);
+
+            const waitForInput = setInterval(() => {
+                const guestInput = document.querySelector(
+                    'input[name="guests"]',
+                );
+
+                if (guestInput instanceof HTMLInputElement) {
+                    clearInterval(waitForInput);
+
+                    updatePrice();
+
+                    observer.observe(guestInput, {
+                        attributes: true,
+                        attributeFilter: ["value"],
+                    });
+
+                    guestInput.addEventListener("input", updatePrice);
+                    guestInput.addEventListener("change", updatePrice);
+                }
+            }, 100);
+        }
+
+        initializeGuestPricing();
+
+        document.addEventListener("astro:page-load", initializeGuestPricing);
+    </script>
+
+    <script>
+        const grid = document.getElementById("date-grid");
+        const selectedInput = document.getElementById("selected-date");
+        const label = document.getElementById("date-range-label");
+        const prevButton = document.getElementById("prev-dates");
+        const nextButton = document.getElementById("next-dates");
+
+        let page = 0;
+
+        function updateButtons() {
+            if (prevButton instanceof HTMLButtonElement) {
+                prevButton.disabled = page === 0;
+
+                prevButton.classList.toggle("opacity-50", page === 0);
+                prevButton.classList.toggle("cursor-not-allowed", page === 0);
+            }
+        }
+
+        function renderDates() {
+            if (!grid) return;
+
+            grid.innerHTML = "";
+
+            const today = new Date();
+            today.setHours(0, 0, 0, 0);
+
+            const displayedMonth = new Date(
+                today.getFullYear(),
+                today.getMonth() + page,
+                1,
+            );
+
+            const year = displayedMonth.getFullYear();
+            const month = displayedMonth.getMonth();
+
+            if (label) {
+                label.textContent = displayedMonth.toLocaleDateString("en-ZA", {
+                    month: "long",
+                    year: "numeric",
+                });
+            }
+
+            const daysInMonth = new Date(year, month + 1, 0).getDate();
+
+            function formatLocalDate(date: Date) {
+                return `${date.getFullYear()}-${String(
+                    date.getMonth() + 1,
+                ).padStart(2, "0")}-${String(date.getDate()).padStart(2, "0")}`;
+            }
+
+            for (let day = 1; day <= daysInMonth; day++) {
+                const date = new Date(year, month, day);
+
+                // Skip past dates
+                if (date < today) continue;
+
+                // Skip Sundays
+                if (date.getDay() === 0) continue;
+
+                const value = formatLocalDate(date);
+
+                const button = document.createElement("button");
+
+                button.type = "button";
+                button.className =
+                    "rounded-lg border p-3 text-sm transition hover:bg-black hover:text-white";
+
+                button.innerHTML = `
+                <div class="font-medium">
+                    ${date.toLocaleDateString("en-ZA", {
+                        day: "numeric",
+                        month: "short",
+                    })}
+                </div>
+                <div class="text-xs opacity-70">
+                    ${date.toLocaleDateString("en-ZA", {
+                        weekday: "short",
+                    })}
+                </div>
+            `;
+
+                button.addEventListener("click", () => {
+                    document
+                        .querySelectorAll("#date-grid button")
+                        .forEach((b) => {
+                            b.classList.remove("bg-black", "text-white");
+                        });
+
+                    button.classList.add("bg-black", "text-white");
+
+                    if (selectedInput instanceof HTMLInputElement) {
+                        selectedInput.value = value;
+                    }
+                });
+
+                grid.appendChild(button);
+            }
+
+            updateButtons();
+        }
+
+        prevButton?.addEventListener("click", () => {
+            if (page > 0) {
+                page--;
+                renderDates();
+            }
+        });
+
+        nextButton?.addEventListener("click", () => {
+            page++;
+            renderDates();
+        });
+
+        renderDates();
+    </script>
+
+    <script
+        define:vars={{
+            productTitle: product.title,
+            price: product.price.value,
+            currency: product.price.currency,
+        }}
+    >
+        const form = document.getElementById("booking-form");
+
+        form?.addEventListener("submit", (e) => {
+            e.preventDefault();
+
+            const guestInput = document.querySelector('input[name="guests"]');
+
+            const guests =
+                guestInput instanceof HTMLInputElement
+                    ? Number(guestInput.value)
+                    : 1;
+
+            const date = document.getElementById("selected-date");
+
+            const location = document.getElementById("location");
+
+            const timeSlot = document.getElementById("time-slot");
+
+            const fullName = document.getElementById("full-name");
+
+            const mobile = document.getElementById("mobile-number");
+
+            const email = document.getElementById("email-address");
+
+            const total = (price * guests).toFixed(2);
+
+            const receipt = `
+BOOKING RECEIPT
+
+Experience:
+${productTitle}
+
+Date:
+${date instanceof HTMLInputElement ? date.value : ""}
+
+Location:
+${location instanceof HTMLSelectElement ? location.value : ""}
+
+Time Slot:
+${timeSlot instanceof HTMLSelectElement ? timeSlot.value : ""}
+
+Guest Count:
+${guests}
+
+Price Per Person:
+${currency}${price.toFixed(2)}
+
+Total:
+${currency}${total}
+
+Customer Details
+
+Name:
+${fullName instanceof HTMLInputElement ? fullName.value : ""}
+
+Email:
+${email instanceof HTMLInputElement ? email.value : ""}
+
+Mobile:
+${mobile instanceof HTMLInputElement ? mobile.value : ""}
+        `;
+
+            alert(receipt);
+        });
+    </script>
+
+    <script>
+        const continueBtn = document.getElementById("continue-btn");
+
+        const selectedDate = document.getElementById("selected-date");
+        const location = document.getElementById("location");
+        const timeSlot = document.getElementById("time-slot");
+
+        const fullName = document.getElementById("full-name");
+        const mobile = document.getElementById("mobile-number");
+        const email = document.getElementById("email-address");
+
+        function validateForm() {
+            const hasDate =
+                selectedDate instanceof HTMLInputElement &&
+                selectedDate.value.trim() !== "";
+
+            const hasLocation =
+                location instanceof HTMLSelectElement &&
+                location.value !== "Select a location";
+
+            const hasTime =
+                timeSlot instanceof HTMLSelectElement &&
+                timeSlot.value !== "Select a time";
+
+            const hasName =
+                fullName instanceof HTMLInputElement &&
+                fullName.value.trim().length >= 2;
+
+            const hasMobile =
+                mobile instanceof HTMLInputElement &&
+                /^[+0-9\s()-]{10,}$/.test(mobile.value);
+
+            const hasEmail =
+                email instanceof HTMLInputElement &&
+                /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.value);
+
+            const isValid =
+                hasDate &&
+                hasLocation &&
+                hasTime &&
+                hasName &&
+                hasMobile &&
+                hasEmail;
+
+            if (continueBtn instanceof HTMLButtonElement) {
+                continueBtn.disabled = !isValid;
+            }
+        }
+
+        [location, timeSlot, fullName, mobile, email].forEach((element) => {
+            element?.addEventListener("input", validateForm);
+            element?.addEventListener("change", validateForm);
+        });
+
+        validateForm();
+    </script>
+</Mainlayout>

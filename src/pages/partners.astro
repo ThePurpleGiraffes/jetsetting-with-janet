@@ -1,0 +1,242 @@
+---
+import Mainlayout from "@/layouts/Mainlayout.astro";
+import { Button } from "@/components/ui/button";
+import { Card } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
+
+const partners = [
+    {
+        name: "International Hotel School",
+        category: "Education",
+    },
+    {
+        name: "Cape Town Tourism",
+        category: "Tourism",
+    },
+    {
+        name: "Nespresso",
+        category: "Luxury Lifestyle",
+    },
+    {
+        name: "Le Creuset",
+        category: "Culinary",
+    },
+    {
+        name: "Diageo",
+        category: "Hospitality",
+    },
+    {
+        name: "Iono FM",
+        category: "Media",
+    },
+];
+
+const partnershipTypes = [
+    "Hospitality",
+    "Tourism",
+    "Luxury Brands",
+    "Food & Beverage",
+    "Events",
+    "Media",
+];
+---
+
+<Mainlayout
+    title="Partners | Jetsetting With Janet"
+    description="Building meaningful partnerships across travel, tourism and hospitality."
+>
+    <!-- Hero -->
+
+    <section class="relative overflow-hidden bg-black py-32 text-white">
+        <div class="container mx-auto max-w-7xl px-4">
+            <div class="max-w-4xl">
+                <Badge class="uppercase tracking-[0.15em]">
+                    Partnerships
+                </Badge>
+
+                <h1 class="mt-6 font-serif text-6xl md:text-8xl">
+                    Stronger
+                    <br />
+                    Together
+                </h1>
+
+                <p class="mt-8 max-w-2xl text-lg text-white/70">
+                    Collaborating with leading brands, destinations, hospitality
+                    groups and tourism organisations to showcase remarkable
+                    experiences across South Africa.
+                </p>
+
+                <Button
+                    class="mt-10 rounded-none px-8 py-6 uppercase tracking-[0.12em]"
+                >
+                    Become A Partner
+                </Button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Introduction -->
+
+    <section class="py-24">
+        <div class="container mx-auto max-w-5xl px-4 text-center">
+            <p
+                class="text-primary text-sm font-semibold uppercase tracking-[0.25em]"
+            >
+                Partnership Philosophy
+            </p>
+
+            <h2 class="mt-6 font-serif text-5xl">
+                Elevating Stories Worth Sharing
+            </h2>
+
+            <p class="text-muted-foreground mt-8 text-lg leading-relaxed">
+                Jetsetting With Janet partners with organisations that are
+                shaping the future of travel, tourism, hospitality, food, wine
+                and luxury experiences. Our goal is to connect audiences with
+                people, destinations and brands creating extraordinary moments.
+            </p>
+        </div>
+    </section>
+
+    <!-- Categories -->
+
+    <section class="bg-muted/30 py-24">
+        <div class="container mx-auto max-w-7xl px-4">
+            <h2 class="mb-10 font-serif text-4xl">Partnership Categories</h2>
+
+            <div class="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+                {
+                    partnershipTypes.map((type) => (
+                        <Card class="flex h-40 items-end p-8 transition hover:shadow-lg">
+                            <h3 class="text-2xl font-semibold">{type}</h3>
+                        </Card>
+                    ))
+                }
+            </div>
+        </div>
+    </section>
+
+    <!-- Featured Partners -->
+
+    <section class="py-24">
+        <div class="container mx-auto max-w-7xl px-4">
+            <h2 class="mb-10 font-serif text-4xl">Featured Partners</h2>
+
+            <div class="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+                {
+                    partners.map((partner) => (
+                        <Card class="group p-8 transition hover:-translate-y-1 hover:shadow-xl">
+                            <Badge>{partner.category}</Badge>
+
+                            <h3 class="mt-5 font-serif text-3xl">
+                                {partner.name}
+                            </h3>
+
+                            <p class="text-muted-foreground mt-4">
+                                Proud collaborator helping showcase excellence
+                                across the hospitality, tourism and lifestyle
+                                industries.
+                            </p>
+                        </Card>
+                    ))
+                }
+            </div>
+        </div>
+    </section>
+
+    <!-- Benefits -->
+
+    <section class="bg-muted/30 py-24">
+        <div class="container mx-auto max-w-6xl px-4">
+            <h2 class="mb-12 text-center font-serif text-5xl">
+                Why Partner With Us?
+            </h2>
+
+            <div class="grid gap-8 md:grid-cols-2 lg:grid-cols-4">
+                <Card class="text-center">
+                    <h3 class="font-semibold">Podcast Features</h3>
+
+                    <p class="text-muted-foreground mt-4">
+                        Dedicated podcast exposure and storytelling.
+                    </p>
+                </Card>
+
+                <Card class="text-center">
+                    <h3 class="font-semibold">Social Reach</h3>
+
+                    <p class="text-muted-foreground mt-4">
+                        Amplification across our social platforms.
+                    </p>
+                </Card>
+
+                <Card class="text-center">
+                    <h3 class="font-semibold">Destination Promotion</h3>
+
+                    <p class="text-muted-foreground mt-4">
+                        Showcase experiences to engaged audiences.
+                    </p>
+                </Card>
+
+                <Card class="text-center">
+                    <h3 class="font-semibold">Authentic Storytelling</h3>
+
+                    <p class="text-muted-foreground mt-4">
+                        Meaningful content that builds trust.
+                    </p>
+                </Card>
+            </div>
+        </div>
+    </section>
+
+    <!-- Partner Logos -->
+
+    <section class="py-24">
+        <div class="container mx-auto max-w-7xl px-4">
+            <div class="mb-12 text-center">
+                <p
+                    class="text-primary text-sm font-semibold uppercase tracking-[0.25em]"
+                >
+                    Trusted By
+                </p>
+
+                <h2 class="mt-4 font-serif text-5xl">Industry Leaders</h2>
+            </div>
+
+            <div class="grid grid-cols-2 gap-6 md:grid-cols-3 lg:grid-cols-6">
+                {
+                    partners.map((partner) => (
+                        <Card class="flex h-32 items-center justify-center">
+                            <span class="text-center font-semibold">
+                                {partner.name}
+                            </span>
+                        </Card>
+                    ))
+                }
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA -->
+
+    <section class="bg-black py-32 text-white">
+        <div class="container mx-auto max-w-4xl px-4 text-center">
+            <p class="uppercase tracking-[0.25em] text-white/60">
+                Let's Collaborate
+            </p>
+
+            <h2 class="mt-6 font-serif text-6xl">Become A Partner</h2>
+
+            <p class="mx-auto mt-6 max-w-2xl text-white/70">
+                Whether you're a luxury hotel, tourism board, culinary brand,
+                destination, event organiser or hospitality business, we'd love
+                to explore opportunities to work together.
+            </p>
+
+            <Button
+                class="mt-12 rounded-none bg-white px-8 py-6 uppercase tracking-[0.15em] text-black"
+            >
+                Start The Conversation
+            </Button>
+        </div>
+    </section>
+</Mainlayout>

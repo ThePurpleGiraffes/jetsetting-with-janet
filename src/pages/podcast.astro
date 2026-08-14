@@ -1,0 +1,434 @@
+---
+import Mainlayout from "@/layouts/Mainlayout.astro";
+import { Button } from "@/components/ui/button";
+import { Card } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
+import { Icon } from "astro-icon/components";;
+import Parser from "rss-parser";
+
+const parser = new Parser();
+
+const feed = await parser.parseURL(
+  "https://rss.iono.fm/rss/chan/8113"
+);
+
+
+const categories = [
+    "Travel",
+    "Hospitality",
+    "Wine",
+    "Food",
+    "Tourism",
+    "Events",
+];
+
+const episodes = feed.items.map((item) => ({
+  title: item.title ?? "Untitled Episode",
+  description: item.contentSnippet ?? "",
+  link: item.link ?? "#",
+  date: item.pubDate ? new Date(item.pubDate) : null,
+  audio: item.enclosure?.url ?? "",
+   duration: item.itunes?.duration ?? "0",
+  image:
+    item.itunes?.image ??
+    "https://images.unsplash.com/photo-1500530855697-b586d89ba3ee",
+}));
+
+const publishSorted = [...episodes]
+  .sort((a, b) => {
+    if (!a.date || !b.date) return 0;
+    return b.date.getTime() - a.date.getTime();
+  })
+  .slice(0, 25);
+
+const durationToSeconds = (duration: string) => {
+  const parts = duration.split(":").map(Number);
+
+  if (parts.length === 3) {
+    return parts[0] * 3600 + parts[1] * 60 + parts[2];
+  }
+
+  if (parts.length === 2) {
+    return parts[0] * 60 + parts[1];
+  }
+
+  return Number(duration) || 0;
+};
+
+const durationSorted = [...episodes]
+  .sort((a, b) => {
+    return durationToSeconds(b.duration) - durationToSeconds(a.duration);
+  })
+  .slice(0, 25);
+
+const guests = [
+    "The Silo Hotel",
+    "International Hotel School",
+    "Cape Town Tourism",
+    "Nespresso",
+    "Diageo",
+    "Le Creuset",
+];
+---
+
+<Mainlayout
+    title="Podcast | Jetsetting With Janet"
+    description="Travel, tourism, hospitality and lifestyle conversations."
+>
+    <!-- Hero -->
+
+    <section class="relative overflow-hidden">
+        <div class="absolute inset-0 bg-black"></div>
+        <img
+            src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee"
+            alt=""
+            class="absolute
+        inset-0 h-full w-full object-cover opacity-40"
+        />
+
+        <div
+            class="container relative z-10 mx-auto max-w-7xl px-4 py-32 lg:py-44"
+        >
+            <div class="max-w-4xl">
+                <Badge class="uppercase tracking-[0.15em]">
+                    New Episodes Weekly
+                </Badge>
+
+                <h1 class="mt-6 font-serif text-6xl text-white md:text-8xl">
+                    Jetsetting
+                    <br />
+                    With Janet
+                </h1>
+
+                <p class="mt-8 max-w-2xl text-lg leading-relaxed text-white/80">
+                    Discover South Africa's hidden gems, hospitality leaders,
+                    luxury experiences and unforgettable destinations through
+                    meaningful conversations.
+                    <span>
+                        Each episode highlights hidden gems, bucket-list
+                        experiences, and the stories behind the brands shaping
+                        the tourism and hospitality landscape.</span
+                    >
+                </p>
+
+                <div class="mt-10 flex flex-wrap gap-4">
+                    <a href="#podcast-listen">
+                         <Button
+                        class="rounded-none px-8 py-6 uppercase tracking-[0.12em]"
+                        >
+                            Listen Now
+                        </Button>
+                    </a>
+                   
+                    <a href="#podcast-browse">
+                        <Button
+                        variant="outline"
+                        class="rounded-none px-8 py-6 uppercase tracking-[0.12em]"
+                    >
+                        Browse Episodes
+                    </Button>
+                    </a>
+                    
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats -->
+
+    <section class="border-y bg-background">
+        <div class="container mx-auto max-w-7xl">
+            <div class="grid grid-cols-2 lg:grid-cols-4">
+                <div class="p-10 text-center">
+                    <h3 class="text-4xl font-bold">320+</h3>
+                    <p class="text-muted-foreground">Episodes</p>
+                </div>
+
+                <div class="p-10 text-center">
+                    <h3 class="text-4xl font-bold">50+</h3>
+                    <p class="text-muted-foreground">Featured Guests</p>
+                </div>
+
+                <div class="p-10 text-center">
+                    <h3 class="text-4xl font-bold">30+</h3>
+                    <p class="text-muted-foreground">Destinations</p>
+                </div>
+
+                <div class="p-10 text-center">
+                    <h3 class="text-4xl font-bold">Weekly</h3>
+                    <p class="text-muted-foreground">New Episodes</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Listen On -->
+
+    <section id="podcast-listen" class="py-24">
+        <div class="container mx-auto max-w-7xl px-4">
+            <h2 class="mb-10 font-serif text-4xl">Listen Anywhere</h2>
+
+            <div class="grid gap-6 md:grid-cols-3">
+                <Card
+                    class="group p-8 transition hover:-translate-y-1 hover:shadow-xl"
+                >
+                    <div class="flex items-center justify-between">
+                        <div class="flex items-center gap-4">
+                            <Icon
+                                name="mdi:spotify"
+                                class="h-10 w-10 text-green-500"
+                            />
+
+                            <div>
+                                <p class="text-muted-foreground text-sm">
+                                    Listen on
+                                </p>
+
+                                <h3 class="text-xl font-semibold">Spotify</h3>
+                            </div>
+                        </div>
+
+                        <Icon name="lucide:arrow-up-right" class="h-5 w-5" />
+                    </div>
+                </Card>
+
+                <Card
+                    class="group p-8 transition hover:-translate-y-1 hover:shadow-xl"
+                >
+                    <div class="flex items-center justify-between">
+                        <div class="flex items-center gap-4">
+                            <Icon
+                                name="mdi:podcast"
+                                class="h-10 w-10 text-purple-500"
+                            />
+
+                            <div>
+                                <p class="text-muted-foreground text-sm">
+                                    Listen on
+                                </p>
+
+                                <h3 class="text-xl font-semibold">
+                                    Apple Podcasts
+                                </h3>
+                            </div>
+                        </div>
+
+                        <Icon name="lucide:arrow-up-right" class="h-5 w-5" />
+                    </div>
+                </Card>
+
+                <Card
+                    class="group p-8 transition hover:-translate-y-1 hover:shadow-xl"
+                >
+                    <div class="flex items-center justify-between">
+                        <div class="flex items-center gap-4">
+                            <Icon
+                                name="mdi:radio"
+                                class="h-10 w-10 text-amber-500"
+                            />
+
+                            <div>
+                                <p class="text-muted-foreground text-sm">
+                                    Listen on
+                                </p>
+
+                                <h3 class="text-xl font-semibold">Iono FM</h3>
+                            </div>
+                        </div>
+
+                        <Icon name="lucide:arrow-up-right" class="h-5 w-5" />
+                    </div>
+                </Card>
+            </div>
+        </div>
+    </section>
+
+    <!-- Featured Episode -->
+
+    <section class="bg-muted/30 py-24">
+        <div class="container mx-auto max-w-7xl px-4">
+            <h2 class="mb-10 font-serif text-4xl">Featured Episode</h2>
+
+            <Card class="overflow-hidden p-0">
+                <div class="grid lg:grid-cols-2">
+                    <img
+                        src={episodes[0].image}
+                        alt={episodes[0].title}
+                        class="mx-auto h-[350px] w-[350px] object-cover lg:h-[450px] lg:w-[450px]"
+                    />
+
+                    <div class="flex flex-col justify-center p-12">
+                        <Badge class="w-fit"> Hospitality </Badge>
+
+                        <h2 class="mt-6 font-serif text-5xl">
+                            {episodes[0].title}
+                        </h2>
+
+                        <p class="text-muted-foreground mt-6">
+                            {episodes[0].description}
+                        </p>
+
+                        <div class="mt-6 flex gap-6 text-sm">
+                            <span>{episodes[0].duration} min</span>
+                            <span>•</span>
+                            <span>Latest Episode</span>
+                        </div>
+
+                        <audio
+                            controls
+                            class="mt-4 w-full"
+                            src={episodes[0].audio}
+                        />
+                    </div>
+                </div>
+            </Card>
+        </div>
+    </section>
+
+
+    <!-- Popular Episodes -->
+    <section id="podcast-browse" class="bg-muted/30 py-0">
+        <div class="container mx-auto max-w-7xl px-4">
+            <select id="episode-sort" class="border mb-4 px-4 py-3">
+                <option value="publish">Publish date</option>
+                <option value="duration">Duration</option>
+            </select>
+
+
+<div id="publish-grid" class="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
+    {
+        publishSorted.map((episode) => (
+            <Card class="overflow-hidden p-0 hover:shadow-xl">
+                <img
+                    src={episode.image}
+                    alt={episode.title}
+                    class="mx-auto h-[120px] w-[120px] object-cover"
+                />
+
+                <div class="p-6">
+                    <Badge>Podcast</Badge>
+
+                    <h3 class="mt-4 text-xl font-semibold">
+                        {episode.title}
+                    </h3>
+
+                    <p class="text-muted-foreground mt-2">
+                        {episode.duration}
+                    </p>
+
+                    <audio
+                        controls
+                        class="mt-4 w-full"
+                        src={episode.audio}
+                    />
+                </div>
+            </Card>
+        ))
+    }
+</div>
+
+
+<div id="duration-grid" class="hidden grid gap-4 md:grid-cols-2 lg:grid-cols-4">
+    {
+        durationSorted.map((episode) => (
+            <Card class="overflow-hidden p-0 hover:shadow-xl">
+                <img
+                    src={episode.image}
+                    alt={episode.title}
+                    class="mx-auto h-[120px] w-[120px] object-cover"
+                />
+
+                <div class="p-6">
+                    <Badge>Podcast</Badge>
+
+                    <h3 class="mt-4 text-xl font-semibold">
+                        {episode.title}
+                    </h3>
+
+                    <p class="text-muted-foreground mt-2">
+                        {episode.duration}
+                    </p>
+
+                    <audio
+                        controls
+                        class="mt-4 w-full"
+                        src={episode.audio}
+                    />
+                </div>
+            </Card>
+        ))
+    }
+</div>
+    </div>
+    </section>
+    <!-- Guests -->
+
+    <section class="bg-muted/30 py-24">
+        <div class="container mx-auto max-w-7xl px-4">
+            <h2 class="mb-10 font-serif text-4xl">Featured Guests</h2>
+
+            <div class="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+                {
+                    guests.map((guest) => (
+                        <Card class="p-8 transition hover:shadow-lg">
+                            <h3 class="font-serif text-3xl">{guest}</h3>
+
+                            <p class="text-muted-foreground mt-4">
+                                Thought leaders and brands shaping the future of
+                                hospitality, tourism and travel.
+                            </p>
+                        </Card>
+                    ))
+                }
+            </div>
+        </div>
+    </section>
+
+    <!-- Become A Guest -->
+
+    <section class="bg-black py-32 text-white">
+        <div class="container mx-auto max-w-4xl px-4 text-center">
+            <p class="uppercase tracking-[0.25em] text-white/60">
+                Feature Invitation
+            </p>
+
+            <h2 class="mt-6 font-serif text-6xl">Share Your Story</h2>
+
+            <p class="mx-auto mt-6 max-w-2xl text-white/70">
+                Hotels, destinations, tourism brands, restaurants and unique
+                experiences are invited to be featured on Jetsetting With Janet.
+            </p>
+
+            <div class="mt-12 grid gap-6 md:grid-cols-2">
+                <div>✓ 15 Minute Interview</div>
+                <div>✓ Podcast Feature</div>
+                <div>✓ Social Media Exposure</div>
+                <div>✓ Promotional Reel</div>
+            </div>
+
+            <Button
+                class="mt-12 rounded-none bg-white px-8 py-6 uppercase tracking-[0.15em] text-black"
+            >
+                Apply To Be Featured
+            </Button>
+        </div>
+    </section>
+</Mainlayout>
+
+<script>
+const select = document.querySelector<HTMLSelectElement>("#episode-sort");
+const publishGrid = document.querySelector("#publish-grid");
+const durationGrid = document.querySelector("#duration-grid");
+
+select?.addEventListener("change", () => {
+    if (!publishGrid || !durationGrid) return;
+
+    if (select.value === "duration") {
+        publishGrid.classList.add("hidden");
+        durationGrid.classList.remove("hidden");
+    } else {
+        durationGrid.classList.add("hidden");
+        publishGrid.classList.remove("hidden");
+    }
+});
+</script>

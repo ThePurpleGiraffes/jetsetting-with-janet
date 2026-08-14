@@ -1,0 +1,64 @@
+---
+import { Card } from "@/components/ui/card";
+
+interface Partner {
+    img: string;
+    alt: string;
+}
+
+const partners: Partner[] = [
+    {
+        img: "https://static.iono.fm/img/iono2/black/ionofm_black_130h.png",
+        alt: "Iono FM",
+    },
+    {
+        img: "https://www.schoolguide.co.za/media/jreviews/photos/original/b5/d7/d2/10056-White-and-Gold-logo-12-1387275263.jpg",
+        alt: "International Hotel School",
+    },
+    {
+        img: "https://www.capetown.travel/wp-content/uploads/2022/05/logo-love-ct-blue.svg",
+        alt: "Cape Town Tourism",
+    },
+
+    {
+        img: "https://www.diageo.com/~/media/Images/D/Diageo-V2/Universal/logo/Logo.svg",
+        alt: "Diageo",
+    },
+    {
+        img: "https://www.nespresso.com/za/media/logo/stores/2/Nespresso_Wordmark_2021_RGB_Black_2_.png",
+        alt: "Nespresso",
+    },
+    {
+        img: "https://www.lecreuset.co.za/on/demandware.static/-/Sites/default/dw9efd89cf/images/logo.svg",
+        alt: "Le Creuset",
+    },
+];
+---
+
+<section class="bg-muted/30 py-24">
+    <div class="container mx-auto max-w-7xl px-4">
+        <div class="space-y-12">
+            <div class="text-center">
+                <p
+                    class="text-primary text-m font-semibold uppercase tracking-[0.2em]"
+                >
+                    Partners
+                </p>
+            </div>
+
+            <div class="grid grid-cols-2 gap-6 md:grid-cols-3 lg:grid-cols-6">
+                {
+                    partners.map((partner) => (
+                        <Card class="flex h-32 items-center justify-center p-6 transition-shadow hover:shadow-md">
+                            <img
+                                src={partner.img}
+                                alt={partner.alt}
+                                class="max-h-16 w-auto object-contain  transition hover:grayscale-0"
+                            />
+                        </Card>
+                    ))
+                }
+            </div>
+        </div>
+    </div>
+</section>

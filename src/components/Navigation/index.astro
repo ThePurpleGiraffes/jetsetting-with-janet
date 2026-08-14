@@ -1,0 +1,27 @@
+---
+import Header4 from "../header-4.astro";
+import { navigationItems } from "../../content/globals/navigation";
+import { SITE_TITLE_FULL } from "../../consts";
+import logo from "@/assets/jwj-logo.avif";
+---
+
+<Header4
+    logo={{
+        label: "JWJ",
+        href: "/",
+        src: logo,
+        alt: SITE_TITLE_FULL,
+    }}
+    navigation={navigationItems.map((item) => ({
+        label: item.title,
+        href: item.href,
+        description: item.description,
+        links: item.links,
+    }))}
+    buttons={[
+        {
+            label: "Book Experience",
+            href: "/experiences",
+        },
+    ]}
+/>

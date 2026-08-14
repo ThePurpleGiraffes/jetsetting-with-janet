@@ -1,0 +1,115 @@
+---
+import "../styles/global.css";
+import MetaData from "../content/globals/metadata.astro";
+import Navigation from "../components/Navigation/index.astro";
+import Footer from "../components/Footer/index.astro";
+
+interface Props {
+    title?: string;
+    description?: string;
+}
+---
+
+<!doctype html>
+<html lang="en">
+    <head>
+        <script>
+            (function (w, d, s, l, i) {
+                w[l] = w[l] || [];
+                w[l].push({
+                    "gtm.start": new Date().getTime(),
+                    event: "gtm.js",
+                });
+                var f = d.getElementsByTagName(s)[0],
+                    j = d.createElement(s),
+                    dl = l != "dataLayer" ? "&l=" + l : "";
+                j.async = true;
+                j.src = "https://www.googletagmanager.com/gtm.js?id=" + i + dl;
+                f.parentNode.insertBefore(j, f);
+            })(window, document, "script", "dataLayer", "GTM-TWWSKVRB");
+        </script>
+
+        <MetaData />
+    </head>
+
+    <body>
+        <!-- Google Tag Manager (noscript) -->
+        <noscript
+            ><iframe
+                src="https://www.googletagmanager.com/ns.html?id=GTM-TWWSKVRB"
+                height="0"
+                width="0"
+                style="display:none;visibility:hidden"></iframe></noscript
+        >
+        <!-- End Google Tag Manager (noscript) -->
+        <Navigation />
+
+        <main>
+            <slot />
+        </main>
+        <Footer />
+
+        <script>
+            const setupMobileMenu = () => {
+            // Fulldev UI blocks dynamically search for these elements or structural dialog toggles
+            const triggers = document.querySelectorAll('[data-dialog-toggle], [data-sheet-toggle], .menu-toggle');
+            
+            triggers.forEach(trigger => {
+                trigger.addEventListener('click', () => {
+                const targetId = trigger.getAttribute('aria-controls') || trigger.getAttribute('data-target');
+                const menu = targetId ? document.getElementById(targetId) : document.querySelector('[data-sheet], [data-dialog], .mobile-menu');
+                
+                if (menu) {
+                    // Toggle open states based on Fulldev/Tailwind CSS styling hooks
+                    const isHidden = menu.classList.contains('hidden');
+                    if (isHidden) {
+                    menu.classList.remove('hidden');
+                    menu.classList.add('flex');
+                    trigger.setAttribute('aria-expanded', 'true');
+                    } else {
+                    menu.classList.remove('flex');
+                    menu.classList.add('hidden');
+                    trigger.setAttribute('aria-expanded', 'false');
+                    }
+                }
+                });
+            });
+        };
+
+        // Initialize layout scripts instantly
+        document.addEventListener('DOMContentLoaded', setupMobileMenu);
+        // Safety handling hook if you add Astro ViewTransitions later
+        document.addEventListener('astro:page-load', setupMobileMenu);
+    </script>
+
+
+    <script>
+        const setupGlobalLinkInteractions = () => {
+        // Monitor every click or tap on the entire document body
+        document.body.addEventListener('click', (event) => {
+            const targetElement = event.target as HTMLElement;
+            
+            // Find if the tapped item is an <a> tag, or inside an <a> tag
+            const link = targetElement.closest('a');
+            if (!link) return;
+
+            // 1. MOBILE EVENT FIX: Ensure the link's target path registers
+            const destination = link.getAttribute('href');
+            
+            // If it's a standard page link (not an anchor id jump link like #features)
+            if (destination && !destination.startsWith('#')) {
+            // Force standard window navigation on mobile if click execution is jammed
+            // (But allow normal defaults first unless overridden)
+            if (event.defaultPrevented) {
+                window.location.href = destination;
+            }
+            }
+        });
+        };
+
+        // Keep execution fully synchronized across page initialization loops
+        document.addEventListener('DOMContentLoaded', setupGlobalLinkInteractions);
+        document.addEventListener('astro:page-load', setupGlobalLinkInteractions);
+    </script>
+    </body>
+</html>

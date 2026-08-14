@@ -1,0 +1,96 @@
+---
+import type { HTMLAttributes } from "astro/types";
+import { Icon as AstroIcon } from "astro-icon/components";
+
+type Props = Omit<HTMLAttributes<"svg">, "name" | "href"> & {
+  href?: HTMLAttributes<"a">["href"];
+  name?: string | number | null;
+};
+
+const { name, href, ...props } = Astro.props as any;
+
+const hrefMap = {
+  "x.com": "simple-icons:x",
+  twitter: "simple-icons:twitter",
+  facebook: "simple-icons:facebook",
+  instagram: "simple-icons:instagram",
+  pinterest: "simple-icons:pinterest",
+  youtube: "simple-icons:youtube",
+  tiktok: "simple-icons:tiktok",
+  snapchat: "simple-icons:snapchat",
+  reddit: "simple-icons:reddit",
+  tumblr: "simple-icons:tumblr",
+  "wa.me": "simple-icons:whatsapp",
+  telegram: "simple-icons:telegram",
+  discord: "simple-icons:discord",
+  vimeo: "simple-icons:vimeo",
+  flickr: "simple-icons:flickr",
+  yelp: "simple-icons:yelp",
+  spotify: "simple-icons:spotify",
+  behance: "simple-icons:behance",
+  dribbble: "simple-icons:dribbble",
+  soundcloud: "simple-icons:soundcloud",
+  github: "simple-icons:github",
+  twitch: "simple-icons:twitch",
+  "tel:": "lucide:phone",
+  "mailto:": "lucide:mail",
+  "maps.app.goo.gl": "lucide:map-pin",
+  linkedin: "simple-icons:linkedin",
+} as const;
+
+const simpleIcons = [
+  "github",
+  "x",
+  "twitter",
+  "facebook",
+  "instagram",
+  "youtube",
+  "linkedin",
+  "apple",
+  "google",
+  "markdown",
+  "claude",
+  "cursor",
+];
+
+const normalizeIcon = (value: string | number | null | undefined) => {
+  if (!value) return undefined;
+
+  const icon = String(value);
+
+  // Already has a collection prefix
+  if (icon.includes(":")) {
+    return icon;
+  }
+
+  // Brand icons
+  if (simpleIcons.includes(icon)) {
+    return `simple-icons:${icon}`;
+  }
+
+  // Default everything else to Lucide
+  return `lucide:${icon}`;
+};
+
+let iconName = normalizeIcon(name);
+
+if (!iconName && href) {
+  const hrefKey = Object.keys(hrefMap).find((key) =>
+    href.toString().includes(key)
+  );
+
+  if (hrefKey) {
+    iconName = hrefMap[hrefKey as keyof typeof hrefMap];
+  }
+}
+---
+
+{
+  iconName && (
+    <AstroIcon
+      name={iconName}
+      class="size-[1em] text-base"
+      {...props}
+    />
+  )
+}

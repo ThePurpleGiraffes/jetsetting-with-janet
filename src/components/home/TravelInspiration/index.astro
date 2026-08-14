@@ -1,0 +1,44 @@
+---
+import { Image } from "astro:assets";
+import { Button } from "@/components/ui/button";
+import cityImg from "../../../assets/city.png";
+---
+
+<section class="relative py-32 py-20 lg:py-32 xl:py-40">
+    <Image
+        src={cityImg}
+        alt="Travel Inspiration"
+        class="absolute inset-0 h-full w-full object-cover"
+    />
+
+    <div class="absolute inset-0 bg-gradient-to-l from-black to-black/20"></div>
+
+    <div class="container relative z-10 mx-auto max-w-7xl px-4">
+        <div class="flex justify-end">
+            <div class="max-w-xl space-y-6">
+                <p
+                    class="text-primary text-sm font-semibold uppercase tracking-[0.2em]"
+                >
+                    Travel Inspiration
+                </p>
+
+                <h2
+                    class="font-serif text-4xl font-medium leading-tight text-white md:text-5xl"
+                >
+                    Explore. Dream. Discover.
+                </h2>
+
+                <p class="text-white/70">
+                    From hidden gems to iconic destinations, find travel
+                    inspiration and curated guides for your next journey.
+                </p>
+<!-- 
+                <Button
+                    class="rounded-none px-6 py-6 text-sm font-semibold uppercase tracking-[0.1em]"
+                >
+                    Explore Destinations
+                </Button> -->
+            </div>
+        </div>
+    </div>
+</section>
