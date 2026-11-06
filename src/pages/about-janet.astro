@@ -1,0 +1,724 @@
+---
+/**
+ * About page – Jetsetting with Janet
+ * Route: /about-janet  (the site footer already links here)
+ *
+ * Images: put the 5 WebP files in  src/assets/about/
+ * Layout: uses the site's existing layout so the header and footer stay consistent.
+ *         Adjust the import path / props below if your layout file is named differently.
+ */
+import { Image } from "astro:assets";
+import MainLayout from "../layouts/Mainlayout.astro";
+
+import portrait from "../assets/about/janet-pillai-portrait.webp";
+import travel from "../assets/about/janet-pillai-travel.webp";
+import closeup from "../assets/about/janet-pillai-closeup.webp";
+import blackCoat from "../assets/about/janet-pillai-black-coat.webp";
+import seated from "../assets/about/janet-pillai-seated.webp";
+
+const title = "About Jetsetting with Janet | Janet Pillai, Founder & Host";
+const description =
+  "Jetsetting with Janet is a Cape Town travel, lifestyle and destination storytelling platform founded by Janet Pillai, connecting people with the stories, cultures and experiences that make South Africa meaningful.";
+
+const site = Astro.site ?? new URL("https://jetsettingwithjanet.com");
+const portraitUrl = new URL(portrait.src, site).href;
+
+// Structured data (AboutPage + Organization + Person) for Google and AI answer engines
+const schema = {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "AboutPage",
+        "@id": "https://jetsettingwithjanet.com/about-janet#webpage",
+        "url": "https://jetsettingwithjanet.com/about-janet",
+        "name": "About Jetsetting with Janet",
+        "about": { "@id": "https://jetsettingwithjanet.com/#organization" },
+        "mainEntity": { "@id": "https://jetsettingwithjanet.com/#janet-pillai" }
+      },
+      {
+        "@type": "Organization",
+        "@id": "https://jetsettingwithjanet.com/#organization",
+        "name": "Jetsetting with Janet",
+        "alternateName": "JwJ",
+        "url": "https://jetsettingwithjanet.com/",
+        "slogan": "Wellness is the ultimate destination.",
+        "description": "A South African travel, lifestyle and destination storytelling platform connecting people with the destinations, experiences, cultures, businesses and stories that make travel meaningful.",
+        "email": "hello@jetsettingwithjanet.com",
+        "address": { "@type": "PostalAddress", "addressLocality": "Cape Town", "addressCountry": "ZA" },
+        "founder": { "@id": "https://jetsettingwithjanet.com/#janet-pillai" },
+        "sameAs": [
+          "https://www.youtube.com/@jetsettingwithjanet3337",
+          "https://www.instagram.com/jetsettingwithjanet1/",
+          "https://www.facebook.com/jetsettingwithjanet",
+          "https://open.spotify.com/show/0sxZ5C8iqU8INGghXB8oon",
+          "https://podcasts.apple.com/us/podcast/jetsetting-with-janet/id1692738648"
+        ]
+      },
+      {
+        "@type": "Person",
+        "@id": "https://jetsettingwithjanet.com/#janet-pillai",
+        "name": "Janet Pillai",
+        "jobTitle": "Founder & Host, Jetsetting with Janet",
+        "image": portraitUrl,
+        "address": { "@type": "PostalAddress", "addressLocality": "Cape Town", "addressCountry": "ZA" },
+        "worksFor": [
+          { "@type": "Organization", "name": "Multilayer Trade Corporation (MLT Corp)" },
+          { "@type": "Organization", "name": "Articulate" },
+          { "@type": "Organization", "name": "Inuversal Group" }
+        ],
+        "alumniOf": { "@type": "CollegeOrUniversity", "name": "University of Durban-Westville" },
+        "sameAs": ["https://www.linkedin.com/in/janetpillai"]
+      }
+    ]
+  };
+---
+
+<MainLayout title={title} description={description}>
+  <script type="application/ld+json" is:inline set:html={JSON.stringify(schema)} />
+
+  <div class="jwj-about">
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+      <symbol id="i-check" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></symbol>
+      <symbol id="i-map" viewBox="0 0 24 24"><path d="M14.1 5.4 9.9 3.6a2 2 0 0 0-1.6 0L3.6 5.6A1 1 0 0 0 3 6.5v13a1 1 0 0 0 1.4.9l3.9-1.7a2 2 0 0 1 1.6 0l4.2 1.8a2 2 0 0 0 1.6 0l4.7-2a1 1 0 0 0 .6-.9v-13a1 1 0 0 0-1.4-.9l-3.9 1.7a2 2 0 0 1-1.6 0zM9 3.5v15M15 5.5v15"/></symbol>
+      <symbol id="i-compass" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="m16.2 7.8-2.1 6.4-6.4 2.1 2.1-6.4z"/></symbol>
+      <symbol id="i-chef" viewBox="0 0 24 24"><path d="M17 21a1 1 0 0 0 1-1v-5.4a5 5 0 0 0-1.3-9.6 6 6 0 0 0-9.4 0A5 5 0 0 0 6 14.6V20a1 1 0 0 0 1 1zM6 17h12"/></symbol>
+      <symbol id="i-landmark" viewBox="0 0 24 24"><path d="M3 22h18M6 18v-7M10 18v-7M14 18v-7M18 18v-7M12 2l8 5H4z"/></symbol>
+      <symbol id="i-leaf" viewBox="0 0 24 24"><path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.5 19 2c1 2 2 4.2 2 8 0 5.5-4.8 10-10 10Z"/><path d="M2 21c0-3 1.9-5.4 5.1-6C9.5 14.5 12 13 13 12"/></symbol>
+      <symbol id="i-mic" viewBox="0 0 24 24"><path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2M12 19v3"/></symbol>
+      <symbol id="i-briefcase" viewBox="0 0 24 24"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2M2 13h20"/></symbol>
+      <symbol id="i-megaphone" viewBox="0 0 24 24"><path d="m3 11 18-5v12L3 14v-3zM11.6 16.8a3 3 0 1 1-5.8-1.6"/></symbol>
+      <symbol id="i-heart" viewBox="0 0 24 24"><path d="M19 14c1.5-1.5 3-3.2 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.8 0-3 .5-4.5 2-1.5-1.5-2.7-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4 3 5.5l7 7Z"/></symbol>
+      <symbol id="i-hand" viewBox="0 0 24 24"><path d="m11 17 2 2a1 1 0 1 0 3-3M14 14l2.5 2.5a1 1 0 1 0 3-3l-3.9-3.9a3 3 0 0 0-4.2 0l-.9.9a1 1 0 1 1-3-3l2.8-2.8a5.8 5.8 0 0 1 7.1-.9l.5.3a2 2 0 0 0 1.4.2L21 4M21 3l1 11h-2M3 3 2 14l6.5 6.5a1 1 0 1 0 3-3M3 4h8"/></symbol>
+      <symbol id="i-users" viewBox="0 0 24 24"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.9M16 3.1a4 4 0 0 1 0 7.8"/></symbol>
+      <symbol id="i-bulb" viewBox="0 0 24 24"><path d="M15 14c.2-1 .7-1.7 1.5-2.5 1-.9 1.5-2.2 1.5-3.5A6 6 0 0 0 6 8c0 1 .2 2.2 1.5 3.5.7.7 1.3 1.5 1.5 2.5M9 18h6M10 22h4"/></symbol>
+      <symbol id="i-globe" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20M2 12h20"/></symbol>
+      <symbol id="i-sprout" viewBox="0 0 24 24"><path d="M7 20h10M10 20c5.5-2.5.8-6.4 3-10M9.5 9.4c1.1.8 1.8 2.2 2.3 3.7-2 .4-3.5.4-4.8-.3-1.2-.6-2.3-1.9-3-4.2 2.8-.5 4.4 0 5.5.8zM14.1 6a7 7 0 0 0-1.1 4c1.9-.1 3.3-.6 4.3-1.4 1-1 1.6-2.3 1.7-4.6-2.7.1-4 1-4.9 2z"/></symbol>
+      <symbol id="i-plane" viewBox="0 0 24 24"><path d="M17.8 19.2 16 11l3.5-3.5C21 6 21.5 4 21 3c-1-.5-3 0-4.5 1.5L13 8 4.8 6.2c-.5-.1-.9.1-1.1.5l-.3.5c-.2.5-.1 1 .3 1.3L9 12l-2 3H4l-1 1 3 2 2 3 1-1v-3l3-2 3.5 5.3c.3.4.8.5 1.3.3l.5-.2c.4-.3.6-.7.5-1.2z"/></symbol>
+      <symbol id="i-school" viewBox="0 0 24 24"><path d="M22 10 12 5 2 10l10 5 10-5zM6 12v5c3 3 9 3 12 0v-5"/></symbol>
+      <symbol id="i-building" viewBox="0 0 24 24"><rect x="4" y="2" width="16" height="20" rx="2"/><path d="M9 22v-4h6v4M8 6h.01M16 6h.01M12 6h.01M12 10h.01M12 14h.01M16 10h.01M16 14h.01M8 10h.01M8 14h.01"/></symbol>
+      <symbol id="i-sparkle" viewBox="0 0 24 24"><path d="M9.9 15.5A2 2 0 0 0 8.5 14l-6.1-1.6a.5.5 0 0 1 0-1L8.5 10A2 2 0 0 0 10 8.5l1.6-6.1a.5.5 0 0 1 1 0L14 8.5a2 2 0 0 0 1.5 1.5l6.1 1.6a.5.5 0 0 1 0 1L15.5 14a2 2 0 0 0-1.5 1.5l-1.6 6.1a.5.5 0 0 1-1 0z"/></symbol>
+      <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></symbol>
+    </svg>
+
+
+    <!-- ================= 1. HERO ================= -->
+    <section class="hero">
+      <div class="container hero-grid">
+        <div>
+          <p class="eyebrow">About Jetsetting with Janet</p>
+          <h1>Beyond the destination.</h1>
+          <p class="lead">Jetsetting with Janet is a Cape Town–based travel, lifestyle and destination storytelling platform. We connect people with the places, cultures, flavours, businesses and people that make South Africa unforgettable, because the best journeys are measured by what we discover, who we meet and the stories we take home.</p>
+          <ul class="ticks">
+            <li><svg><use href="#i-check"/></svg>Travel</li>
+            <li><svg><use href="#i-check"/></svg>Culture</li>
+            <li><svg><use href="#i-check"/></svg>Lifestyle</li>
+            <li><svg><use href="#i-check"/></svg>Storytelling</li>
+            <li><svg><use href="#i-check"/></svg>Experiences</li>
+          </ul>
+          <div class="btn-row">
+            <a class="btn btn-primary" href="#founder">Meet Janet</a>
+            <a class="btn btn-dark" href="#partner">Partner With Us</a>
+          </div>
+        </div>
+        <div class="hero-media">
+          <div class="frame" aria-hidden="true"></div>
+          <Image src={portrait} alt="Portrait of Janet Pillai, founder and host of Jetsetting with Janet" widths={[480, 800, 1200]} sizes="(min-width: 1024px) 40vw, 100vw" loading="eager" fetchpriority="high" />
+          <div class="hero-caption">
+            <span>Founder &amp; Host</span>
+            <strong>Janet Pillai</strong>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= 2. OUR STORY ================= -->
+    <section class="section section-muted" id="story">
+      <div class="container split">
+        <div>
+          <p class="eyebrow">Our Story</p>
+          <h2 class="h2" style="margin-top:.75rem">Every destination has a story.</h2>
+          <div class="prose" style="margin-top:1.5rem">
+            <p>Founded by Janet Pillai and headquartered in Cape Town, Jetsetting with Janet (JwJ) takes audiences beyond conventional sightseeing to explore the food, heritage, hospitality, wellness and culture that shape a destination.</p>
+            <p>What began as a travel media platform has grown into a broader experiential tourism and lifestyle brand. We bring together media, storytelling, content creation and strategic partnerships to promote South Africa as a destination, and to create meaningful opportunities for the tourism businesses, cultural institutions, hospitality brands and experience providers who make it special.</p>
+            <p>Our projects span culinary tourism, heritage tourism, cultural experiences, destination storytelling and tourism partnerships, all built around one simple idea: travel is ultimately about connection.</p>
+          </div>
+          <div class="pillars">
+            <div class="pillar"><strong>People</strong><span>The faces behind tourism</span></div>
+            <div class="pillar"><strong>Place</strong><span>Destinations with depth</span></div>
+            <div class="pillar"><strong>Purpose</strong><span>Tourism that gives back</span></div>
+          </div>
+        </div>
+        <div class="story-media">
+          <Image src={travel} alt="Janet Pillai on the go, wearing sunglasses" widths={[480, 800, 1200]} sizes="(min-width: 1024px) 40vw, 100vw" class="tall" />
+          <div class="note">
+            <p>“Wellness is the ultimate destination.”</p>
+            <span>The JwJ philosophy</span>
+          </div>
+          <Image src={closeup} alt="Close-up portrait of Janet Pillai" widths={[480, 800, 1200]} sizes="(min-width: 1024px) 40vw, 100vw" class="short" />
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= 3. VISION & MISSION ================= -->
+    <section class="section">
+      <div class="container">
+        <div class="vm-grid">
+          <div class="card gold">
+            <p class="eyebrow">Our Vision</p>
+            <p>To become a leading African travel and lifestyle storytelling platform that inspires people to travel differently, experience deeply and connect meaningfully.</p>
+          </div>
+          <div class="card">
+            <p class="eyebrow">Our Mission</p>
+            <h3>Authentic stories that grow South Africa’s tourism economy.</h3>
+            <ul class="checklist cols">
+              <li><svg><use href="#i-check"/></svg>Promote South African destinations and experiences</li>
+              <li><svg><use href="#i-check"/></svg>Showcase the people behind the tourism economy</li>
+              <li><svg><use href="#i-check"/></svg>Create commercially viable experiential tourism products</li>
+              <li><svg><use href="#i-check"/></svg>Connect tourism businesses with new audiences and markets</li>
+              <li><svg><use href="#i-check"/></svg>Champion heritage and cultural tourism</li>
+              <li><svg><use href="#i-check"/></svg>Support local tourism SMMEs</li>
+              <li><svg><use href="#i-check"/></svg>Encourage domestic travel and attract international visitors</li>
+              <li><svg><use href="#i-check"/></svg>Turn destinations into experiences through storytelling</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= 4. WHAT WE DO ================= -->
+    <section class="section section-muted" id="what-we-do">
+      <div class="container">
+        <div class="section-head">
+          <p class="eyebrow">What We Do</p>
+          <h2 class="h2">Travel that invites you to take part, not just look on.</h2>
+          <p class="lead">From destination features to immersive culinary and heritage journeys, every JwJ project is designed to help travellers participate rather than simply observe.</p>
+        </div>
+        <div class="grid-3">
+          <article class="card offer">
+            <span class="icon-badge"><svg class="icon"><use href="#i-map"/></svg></span>
+            <h3>Travel &amp; Destination Storytelling</h3>
+            <p>Engaging stories about destinations, attractions, accommodation, restaurants, events and the people who make tourism possible, with a special connection to Cape Town and the Western Cape.</p>
+          </article>
+          <article class="card offer">
+            <span class="icon-badge"><svg class="icon"><use href="#i-compass"/></svg></span>
+            <h3>Experiential Tourism</h3>
+            <p>Curated experiences that blend travel, food, culture, heritage, wellness and people, so visitors leave with memories and not just photographs.</p>
+          </article>
+          <article class="card offer">
+            <span class="icon-badge"><svg class="icon"><use href="#i-chef"/></svg></span>
+            <h3>Culinary Tourism</h3>
+            <p>Food as an entry point into culture, history and human connection: dining experiences that go far beyond the plate.</p>
+          </article>
+          <article class="card offer">
+            <span class="icon-badge"><svg class="icon"><use href="#i-landmark"/></svg></span>
+            <h3>Heritage &amp; Cultural Tourism</h3>
+            <p>Journeys that connect visitors with South Africa’s history and identity. We believe heritage should not only preserve the past, it should create meaningful experiences today.</p>
+          </article>
+          <article class="card offer">
+            <span class="icon-badge"><svg class="icon"><use href="#i-leaf"/></svg></span>
+            <h3>Lifestyle &amp; Wellness</h3>
+            <p>Exploring how travel nourishes physical, emotional, cultural and social wellbeing for the modern traveller seeking more than a getaway.</p>
+          </article>
+          <article class="card offer">
+            <span class="icon-badge"><svg class="icon"><use href="#i-mic"/></svg></span>
+            <h3>Media &amp; Content</h3>
+            <p>Interviews, podcasts, video, destination features, travel reviews, event coverage, social media, branded storytelling and tourism campaigns.</p>
+          </article>
+        </div>
+        <p class="formula">
+          <b>Travel</b><i>+</i><b>Food</b><i>+</i><b>Culture</b><i>+</i><b>Heritage</b><i>+</i><b>Wellness</b><i>+</i><b>Storytelling</b><i>+</i><b>People</b>
+        </p>
+      </div>
+    </section>
+
+    <!-- ================= 5. DIFFERENTIATOR ================= -->
+    <section class="section section-dark">
+      <div class="container">
+        <div class="diff">
+          <p class="eyebrow">Our Difference</p>
+          <p class="ask">We don’t simply ask <s>“Where can you go?”</s></p>
+          <p class="answer">We ask: <em>“What story will you discover when you get there?”</em></p>
+          <div class="story-lines">
+            <div><strong>Every destination</strong>has a story.</div>
+            <div><strong>Every meal</strong>has a story.</div>
+            <div><strong>Every heritage site</strong>has a story.</div>
+            <div><strong>Every entrepreneur</strong>has a story.</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= 6. FLAGSHIP PROJECTS ================= -->
+    <section class="section" id="projects">
+      <div class="container">
+        <div class="section-head">
+          <p class="eyebrow">Flagship Projects</p>
+          <h2 class="h2">Stories you can step into.</h2>
+        </div>
+        <div class="projects">
+          <article class="project feature p-lg">
+            <span class="tag">Heritage Tourism</span>
+            <h3>Footsteps to Freedom</h3>
+            <p>A Cape Town heritage journey connecting the significant sites and stories of South Africa’s path to democracy, brought to life through storytelling and curated visitor experiences.</p>
+          </article>
+          <article class="project cream p-lg">
+            <span class="tag">Culinary Tourism</span>
+            <h3>Beyond the Plate</h3>
+            <p>An immersive culinary experience that uses food as a gateway to culture, travel, heritage, wellness and human connection, developed in partnership with the International Hotel School in Cape Town.</p>
+          </article>
+          <article class="project p-sm">
+            <span class="tag">Coming Soon</span>
+            <h3>Culture Vulture</h3>
+            <p>A proposed cultural experience connecting visitors with Cape Town’s theatre, arts and entertainment landscape.</p>
+          </article>
+          <article class="project p-sm">
+            <span class="tag">Editorial</span>
+            <h3>Destination Stories</h3>
+            <p>A growing portfolio of features on South African destinations, stays, restaurants, attractions and tourism entrepreneurs.</p>
+          </article>
+          <article class="project p-sm">
+            <span class="tag">Media</span>
+            <h3>JwJ Media</h3>
+            <p>Conversations with tourism leaders, hospitality professionals, creatives, cultural practitioners and destination personalities.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= 7. MEET THE FOUNDER ================= -->
+    <section class="section section-muted" id="founder">
+      <div class="container split">
+        <div class="founder-media">
+          <Image src={blackCoat} alt="Janet Pillai, entrepreneur, executive and founder of Jetsetting with Janet" widths={[480, 800, 1200]} sizes="(min-width: 1024px) 40vw, 100vw" />
+          <div class="badge"><strong>20+</strong><span>years leading organisations across transport, tourism, communications and healthcare</span></div>
+        </div>
+        <div>
+          <p class="eyebrow">Meet the Founder</p>
+          <h2 class="h2" style="margin-top:.75rem">Janet Pillai</h2>
+          <p class="role-line">Entrepreneur &nbsp;|&nbsp; Executive &nbsp;|&nbsp; Strategic Leader</p>
+          <div class="prose" style="margin-top:1.5rem">
+            <p>For more than two decades, Janet Pillai has led organisations at the intersection of transport, tourism, communications and healthcare, earning a reputation as a strategic leader who turns vision into sustainable growth.</p>
+            <p>As Founder and CEO of Multilayer Trade Corporation (MLT Corp), she has built one of South Africa’s trusted providers of integrated transport, accommodation and logistics solutions for the corporate, government, tourism and maritime sectors. She also founded Articulate, a communications and strategic marketing agency, and serves as Chief Operating Officer of Inuversal Group, an emerging precision healthcare organisation.</p>
+            <p>Her career spans academia, public service and entrepreneurship, underpinned by internationally recognised work in heritage preservation, governance and organisational leadership. That experience shapes Jetsetting with Janet’s distinctive approach: connecting business, culture, people and place.</p>
+          </div>
+          <blockquote class="pullquote">“Building businesses that move people, industries and ideas forward.”</blockquote>
+          <div class="roles">
+            <div class="role"><span class="icon-badge"><svg class="icon"><use href="#i-briefcase"/></svg></span><div><strong>Founder &amp; CEO</strong><span>MLT Corporation</span></div><em>2002 – Present</em></div>
+            <div class="role"><span class="icon-badge"><svg class="icon"><use href="#i-megaphone"/></svg></span><div><strong>Founder</strong><span>Articulate</span></div><em>2012 – Present</em></div>
+            <div class="role"><span class="icon-badge"><svg class="icon"><use href="#i-heart"/></svg></span><div><strong>Chief Operating Officer</strong><span>Inuversal Group</span></div><em>Present</em></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= 8. BY THE NUMBERS ================= -->
+    <section class="section section-dark">
+      <div class="container">
+        <div class="section-head">
+          <p class="eyebrow">By the Numbers</p>
+          <h2 class="h2">A legacy of leadership. A future of impact.</h2>
+        </div>
+        <div class="stats">
+          <div class="stat"><strong>24+</strong><span>Years leading MLT Corporation</span></div>
+          <div class="stat"><strong>30+</strong><span>Years of executive leadership experience</span></div>
+          <div class="stat"><strong>3</strong><span>Businesses founded and led</span></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= 9. LEADERSHIP JOURNEY ================= -->
+    <section class="section" id="journey">
+      <div class="container">
+        <div class="section-head">
+          <p class="eyebrow">Leadership Journey</p>
+          <h2 class="h2">A career rooted in purpose, built on impact.</h2>
+        </div>
+        <div class="split journey">
+          <ol class="timeline">
+            <li>
+              <p class="when">1994 – Present</p>
+              <h3>Visiting Fellow &amp; Curator</h3>
+              <p class="org">University of Fort Hare, Eastern Cape</p>
+              <p>Collections management, museum and archival work, and digitisation of liberation-struggle records, including a catalogue of artworks from the ANC Archives and mirror archives with the Universities of Michigan and Connecticut.</p>
+            </li>
+            <li>
+              <p class="when">1997 – 1998</p>
+              <h3>International Fellowships</h3>
+              <p class="org">University of Michigan &amp; Smithsonian Institution</p>
+              <p>Awarded the King-Chavez-Parks Visiting Professorship (University of Michigan Ann Arbor and Michigan State University) and a Visiting Fellowship to the Smithsonian Institution, researching South African liberation archives and cultural heritage.</p>
+            </li>
+            <li>
+              <p class="when">Public Service</p>
+              <h3>Director: Arts, Culture &amp; Heritage</h3>
+              <p class="org">Western Cape Provincial Government</p>
+              <p>Led the Arts, Culture and Heritage portfolio, driving policy, strategic planning and the promotion of cultural preservation and economic development.</p>
+            </li>
+            <li>
+              <p class="when">2002 – Present</p>
+              <h3>Founder &amp; CEO</h3>
+              <p class="org">Multilayer Trade Corporation (MLT Corp)</p>
+              <p>Transport, shuttle and accommodation solutions for corporate, government, tourism and maritime clients, built on reliability, service excellence and innovation.</p>
+            </li>
+            <li>
+              <p class="when">2012 – Present</p>
+              <h3>Founder</h3>
+              <p class="org">Articulate</p>
+              <p>Strategic marketing, communications, PR and events, helping companies amplify their brand through end-to-end campaigns.</p>
+            </li>
+            <li>
+              <p class="when">Present</p>
+              <h3>Founder &amp; Host</h3>
+              <p class="org">Jetsetting with Janet</p>
+              <p>Championing conversations that inspire growth, empowerment and leadership, and building experiences that put South African stories at the heart of travel.</p>
+            </li>
+          </ol>
+
+          <div class="side-stack">
+            <div class="card">
+              <p class="eyebrow">Recognition</p>
+              <ul class="mini-list">
+                <li>Ambassador: Long March to Freedom</li>
+                <li>Dame of the Order of Saint Stanislas</li>
+                <li>Certified Director CD(SA)<span>Advanced Board Directorship 2026 · sitting for CDSA 2027</span></li>
+              </ul>
+            </div>
+            <div class="card">
+              <p class="eyebrow">Education</p>
+              <ul class="mini-list">
+                <li>BA <i>cum laude</i>, University of Durban-Westville<span>English, French &amp; Art History · French Embassy Bursary · German Embassy Award</span></li>
+                <li>BA Honours <i>cum laude</i>, University of Durban-Westville<span>Vice-Chancellor’s Award for Academic Excellence</span></li>
+                <li>Diploma: Principles of Public Relations<span>Executive Education</span></li>
+              </ul>
+            </div>
+            <div class="card">
+              <p class="eyebrow">Board &amp; Memberships</p>
+              <ul class="mini-list">
+                <li>Board Member &amp; Shareholder, Inuversal Group</li>
+                <li>Board Member, Sando Bursary Trust</li>
+                <li>Committee Member, SATSA Western Cape</li>
+                <li>Executive Committee, Business Women’s Association of Cape Town</li>
+                <li>Member, IoDSA</li>
+                <li>Former Board Chairwoman, Zone Cape Town</li>
+                <li>Former Board Member, StreetSmart South Africa</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= 10. LEADERSHIP PHILOSOPHY ================= -->
+    <section class="section section-muted">
+      <div class="container">
+        <div class="section-head center">
+          <p class="eyebrow">A Leadership Philosophy</p>
+          <h2 class="h2">“When businesses are built on service and trust, they become vehicles for transformation.”</h2>
+        </div>
+        <div class="values">
+          <div class="value"><span class="icon-badge"><svg class="icon"><use href="#i-hand"/></svg></span><h3>Integrity</h3><p>Strong values, transparency and accountability in every decision.</p></div>
+          <div class="value"><span class="icon-badge"><svg class="icon"><use href="#i-users"/></svg></span><h3>Service</h3><p>Leading with empathy and a commitment to excellence.</p></div>
+          <div class="value"><span class="icon-badge"><svg class="icon"><use href="#i-bulb"/></svg></span><h3>Innovation</h3><p>New ideas, technology and strategic partnerships.</p></div>
+          <div class="value"><span class="icon-badge"><svg class="icon"><use href="#i-globe"/></svg></span><h3>Impact</h3><p>Sustainable solutions that uplift industries and communities.</p></div>
+          <div class="value"><span class="icon-badge"><svg class="icon"><use href="#i-sprout"/></svg></span><h3>Legacy</h3><p>Building businesses that inspire and create long-term value.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= 11. PODCAST ================= -->
+    <section class="section section-dark">
+      <div class="container podcast">
+        <Image src={seated} alt="Janet Pillai seated in a velvet armchair during a podcast shoot" widths={[480, 800, 1200]} sizes="(min-width: 1024px) 40vw, 100vw" style="aspect-ratio:auto;max-width:100%" />
+        <div>
+          <p class="eyebrow">The Podcast</p>
+          <h2 class="h2" style="margin-top:.75rem">Exploring travel. Business. People. Possibilities.</h2>
+          <p class="lead" style="margin-top:1rem">A podcast that takes listeners on journeys across the tourism industry and beyond, sharing stories, insights and inspiration from the leaders shaping the world. Through mentorship, speaking and every episode, Janet champions women’s leadership, sustainable tourism, cultural preservation and purpose-driven entrepreneurship.</p>
+          <div class="listen">
+            <a href="https://www.iono.fm/e/1321235" target="_blank" rel="noreferrer"><svg class="icon"><use href="#i-mic"/></svg>Iono FM</a>
+            <a href="https://open.spotify.com/show/0sxZ5C8iqU8INGghXB8oon" target="_blank" rel="noreferrer"><svg class="icon"><use href="#i-mic"/></svg>Spotify</a>
+            <a href="https://podcasts.apple.com/us/podcast/jetsetting-with-janet/id1692738648" target="_blank" rel="noreferrer"><svg class="icon"><use href="#i-mic"/></svg>Apple Podcasts</a>
+          </div>
+          <div class="btn-row">
+            <a class="btn btn-primary" href="/podcast">Listen To Latest Episode</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= 12. WHO WE SERVE ================= -->
+    <section class="section">
+      <div class="container">
+        <div class="section-head">
+          <p class="eyebrow">Who We Serve</p>
+          <h2 class="h2">For everyone who wants to travel differently.</h2>
+        </div>
+        <div class="chips">
+          <div class="chip"><span class="icon-badge"><svg class="icon"><use href="#i-map"/></svg></span><div><strong>Domestic Travellers</strong><span>South Africans rediscovering their own country through new experiences.</span></div></div>
+          <div class="chip"><span class="icon-badge"><svg class="icon"><use href="#i-plane"/></svg></span><div><strong>International Travellers</strong><span>Visitors seeking authentic South African experiences beyond the usual sights.</span></div></div>
+          <div class="chip"><span class="icon-badge"><svg class="icon"><use href="#i-compass"/></svg></span><div><strong>Tourism Trade</strong><span>Travel agents, tour operators, DMCs and international tourism partners.</span></div></div>
+          <div class="chip"><span class="icon-badge"><svg class="icon"><use href="#i-building"/></svg></span><div><strong>Corporate</strong><span>Curated team experiences, events and destination engagement.</span></div></div>
+          <div class="chip"><span class="icon-badge"><svg class="icon"><use href="#i-school"/></svg></span><div><strong>Education</strong><span>Schools and universities seeking cultural, heritage and experiential learning.</span></div></div>
+          <div class="chip"><span class="icon-badge"><svg class="icon"><use href="#i-sparkle"/></svg></span><div><strong>Lifestyle Audience</strong><span>Lovers of travel, food, wellness, culture and hospitality.</span></div></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= 13. PARTNER WITH US ================= -->
+    <section class="section" id="partner" style="padding-top:0">
+      <div class="container">
+        <div class="cta">
+          <div>
+            <p class="eyebrow">Partner With Us</p>
+            <h2 class="h2" style="margin-top:.75rem">Tourism grows through collaboration.</h2>
+            <p class="lead" style="margin-top:1rem">We work with tourism authorities, hotels and lodges, restaurants, airlines, DMCs, heritage institutions, wellness brands, corporate sponsors, media and tourism SMMEs, through content campaigns, hosted trips, sponsored experiences, events and international market development.</p>
+            <div class="btn-row">
+              <a class="btn btn-primary" href="/partners">Become a Partner <svg class="icon" style="width:1rem;height:1rem"><use href="#i-arrow"/></svg></a>
+              <a class="btn btn-outline" href="/contact">Contact Us</a>
+            </div>
+          </div>
+          <ul class="checklist">
+            <li><svg><use href="#i-check"/></svg>Tell your story</li>
+            <li><svg><use href="#i-check"/></svg>Reach new audiences</li>
+            <li><svg><use href="#i-check"/></svg>Create memorable experiences</li>
+            <li><svg><use href="#i-check"/></svg>Build destination awareness</li>
+            <li><svg><use href="#i-check"/></svg>Generate tourism demand</li>
+            <li><svg><use href="#i-check"/></svg>Connect with the travel trade</li>
+            <li><svg><use href="#i-check"/></svg>Position your brand within authentic South African storytelling</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= 14. BRAND PROMISE ================= -->
+    <section class="section section-muted">
+      <div class="container promise">
+        <p class="eyebrow">Our Promise</p>
+        <p class="big" style="margin-top:1.25rem">The best journeys are not measured by the places we visit. They are measured by what we discover, who we meet and the stories we take home.</p>
+        <p class="sig">Janet Pillai</p>
+      </div>
+    </section>
+  </div>
+</MainLayout>
+
+<style is:global>
+  /* All rules are scoped under .jwj-about so nothing leaks into the rest of the site.
+     Colours and fonts match the site's design tokens (Mainlayout.css :root). */
+  .jwj-about {
+      --background: #ffffff;
+      --foreground: #0a0a0a;
+      --primary: #a48137;           /* JwJ gold */
+      --primary-foreground: #ffffff;
+      --muted: #f5f5f5;
+      --muted-30: #fcfcfc;          /* bg-muted/30 */
+      --muted-foreground: #737373;
+      --border: #e5e5e5;
+      --cream: #f2ede6;             /* --chart-1 */
+      --sand: #c1b099;              /* --chart-2 */
+      --night: #080302;             /* podcast section */
+      --radius: .625rem;
+      --font-sans: ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+      --font-serif: ui-serif, Georgia, Cambria, "Times New Roman", Times, serif;
+    }
+  .jwj-about *, .jwj-about *::before, .jwj-about *::after { box-sizing: border-box; }
+  .jwj-about { margin: 0; font-family: var(--font-sans); color: var(--foreground); background: var(--background); line-height: 1.5; -webkit-font-smoothing: antialiased; }
+  .jwj-about img { display: block; max-width: 100%; }
+  .jwj-about a { color: inherit; text-decoration: none; }
+  .jwj-about h1, .jwj-about h2, .jwj-about h3, .jwj-about h4, .jwj-about p { margin: 0; }
+  .jwj-about .container { width: 100%; max-width: 80rem; margin: 0 auto; padding: 0 1rem; }
+  .jwj-about .eyebrow { color: var(--primary); font-size: .875rem; font-weight: 600; text-transform: uppercase; letter-spacing: .1em; }
+  .jwj-about .h2 { font-family: var(--font-serif); font-weight: 500; font-size: 2.25rem; line-height: 1.2; }
+  .jwj-about .lead { color: var(--muted-foreground); font-size: 1.125rem; line-height: 1.7; }
+  .jwj-about .prose p { color: var(--muted-foreground); line-height: 1.75; }
+  .jwj-about .prose p + p { margin-top: 1rem; }
+  .jwj-about .stack > * + * { margin-top: 1rem; }
+  .jwj-about .section { padding: 5rem 0; }
+  .jwj-about .section-muted { background: var(--muted-30); }
+  .jwj-about .section-dark { background: var(--night); color: #fafafa; }
+  .jwj-about .section-dark .lead, .jwj-about .section-dark .prose p { color: #a3a3a3; }
+  .jwj-about .section-head { max-width: 42rem; margin-bottom: 3rem; }
+  .jwj-about .section-head.center { margin-left: auto; margin-right: auto; text-align: center; }
+  .jwj-about .section-head .h2 { margin-top: .75rem; }
+  .jwj-about .section-head .lead { margin-top: 1rem; }
+  .jwj-about .btn { display: inline-flex; align-items: center; justify-content: center; gap: .5rem; border-radius: 8px; font-weight: 500; font-size: 1rem; padding: 1rem 2rem; transition: background-color .2s, color .2s; white-space: nowrap; }
+  .jwj-about .btn-primary { background: var(--primary); color: var(--primary-foreground); }
+  .jwj-about .btn-primary:hover { background: rgba(164,129,55,.8); }
+  .jwj-about .btn-dark { background: #262626; color: #fff; }
+  .jwj-about .btn-dark:hover { background: #404040; }
+  .jwj-about .btn-outline { border: 1px solid var(--border); background: #fff; color: var(--foreground); }
+  .jwj-about .btn-outline:hover { background: var(--muted); }
+  .jwj-about .btn-row { display: flex; flex-wrap: wrap; gap: .75rem; margin-top: 2rem; }
+  .jwj-about .icon { width: 1.25rem; height: 1.25rem; stroke: currentColor; fill: none; stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; }
+  .jwj-about .icon-badge { display: inline-flex; align-items: center; justify-content: center; width: 3rem; height: 3rem; border-radius: 9999px; background: var(--cream); color: var(--primary); flex-shrink: 0; }
+  .jwj-about .hero { background: var(--night); color: #fafafa; position: relative; overflow: hidden; }
+  .jwj-about .hero::after { content: ""; position: absolute; inset: auto -10% -40% auto; width: 60%; height: 80%; background: radial-gradient(closest-side, rgba(164,129,55,.22), transparent); pointer-events: none; }
+  .jwj-about .hero-grid { display: grid; gap: 3rem; align-items: center; padding-top: 4rem; padding-bottom: 4rem; position: relative; z-index: 1; }
+  .jwj-about .hero h1 { font-family: var(--font-serif); font-weight: 500; font-size: 2.75rem; line-height: 1.1; letter-spacing: -.02em; margin-top: 1rem; }
+  .jwj-about .hero .lead { color: #d4d4d4; margin-top: 1.5rem; max-width: 36rem; }
+  .jwj-about .ticks { display: flex; flex-wrap: wrap; gap: .75rem 1.5rem; margin: 1.75rem 0 0; padding: 0; list-style: none; font-size: .875rem; color: #e5e5e5; }
+  .jwj-about .ticks li { display: flex; align-items: center; gap: .5rem; }
+  .jwj-about .ticks svg { width: 1rem; height: 1rem; stroke: var(--primary); fill: none; stroke-width: 2.5; }
+  .jwj-about .hero-media { position: relative; max-width: 28rem; justify-self: center; width: 100%; }
+  .jwj-about .hero-media img { border-radius: 1rem; width: 100%; aspect-ratio: 4/5; object-fit: cover; object-position: top; box-shadow: 0 30px 60px -20px rgba(0,0,0,.6); }
+  .jwj-about .hero-media .frame { position: absolute; inset: 1.25rem -1.25rem -1.25rem 1.25rem; border: 1px solid rgba(164,129,55,.55); border-radius: 1rem; z-index: -1; }
+  .jwj-about .hero-caption { position: absolute; left: -1rem; bottom: 1.5rem; background: #fff; color: var(--foreground); border-radius: .75rem; padding: .875rem 1.125rem; box-shadow: 0 10px 30px rgba(0,0,0,.25); }
+  .jwj-about .hero-caption strong { display: block; font-family: var(--font-serif); font-weight: 500; font-size: 1.125rem; }
+  .jwj-about .hero-caption span { font-size: .75rem; color: var(--primary); text-transform: uppercase; letter-spacing: .1em; font-weight: 600; }
+  @media (min-width: 640px) {
+  .jwj-about .hero h1 { font-size: 3.5rem; }
+  }
+  @media (min-width: 1024px) {
+  .jwj-about .hero-grid { grid-template-columns: 1.15fr .85fr; padding-top: 6rem; padding-bottom: 6rem; min-height: 80svh; }
+  .jwj-about .hero h1 { font-size: 4rem; }
+  }
+  .jwj-about .split { display: grid; gap: 3rem; align-items: center; }
+  @media (min-width: 1024px) {
+  .jwj-about .split { grid-template-columns: 1fr 1fr; gap: 5rem; }
+  .jwj-about .split.reverse > :first-child { order: 2; }
+  }
+  .jwj-about .pillars { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; margin-top: 2rem; }
+  .jwj-about .pillar { border: 1px solid var(--border); border-radius: var(--radius); background: #fff; padding: 1.25rem 1rem; text-align: center; }
+  .jwj-about .pillar strong { display: block; font-family: var(--font-serif); font-weight: 500; font-size: 1.375rem; }
+  .jwj-about .pillar span { font-size: .8125rem; color: var(--muted-foreground); }
+  .jwj-about .story-media { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+  .jwj-about .story-media img { border-radius: 1rem; width: 100%; height: 100%; object-fit: cover; }
+  .jwj-about .story-media .tall { grid-row: span 2; aspect-ratio: 3/4.4; object-position: top; }
+  .jwj-about .story-media .note { background: var(--cream); border-radius: 1rem; padding: 1.5rem; display: flex; flex-direction: column; justify-content: center; }
+  .jwj-about .story-media .note p { font-family: var(--font-serif); font-size: 1.25rem; line-height: 1.4; }
+  .jwj-about .story-media .note span { margin-top: .75rem; font-size: .75rem; letter-spacing: .1em; text-transform: uppercase; color: var(--primary); font-weight: 600; }
+  .jwj-about .story-media .short { aspect-ratio: 1/1; object-position: center 20%; }
+  .jwj-about .vm-grid { display: grid; gap: 1.5rem; }
+  @media (min-width: 900px) {
+  .jwj-about .vm-grid { grid-template-columns: 1fr 1.4fr; }
+  }
+  .jwj-about .card { background: #fff; border: 1px solid var(--border); border-radius: 1rem; padding: 2rem; }
+  .jwj-about .card h3 { font-family: var(--font-serif); font-weight: 500; font-size: 1.5rem; margin-top: 1rem; }
+  .jwj-about .card > p.eyebrow { color: var(--primary); margin-top: 0; }
+  .jwj-about .card > p:not(.eyebrow) { color: var(--muted-foreground); margin-top: .75rem; line-height: 1.7; }
+  .jwj-about .card.gold { background: var(--primary); border-color: var(--primary); color: #fff; }
+  .jwj-about .card.gold > p.eyebrow { color: #fff; opacity: .85; }
+  .jwj-about .card.gold > p:not(.eyebrow) { color: rgba(255,255,255,.9); font-family: var(--font-serif); font-size: 1.5rem; line-height: 1.4; }
+  .jwj-about .checklist { list-style: none; padding: 0; margin: 1.5rem 0 0; display: grid; gap: .75rem; }
+  @media (min-width: 640px) {
+  .jwj-about .checklist.cols { grid-template-columns: 1fr 1fr; }
+  }
+  .jwj-about .checklist li { display: flex; gap: .625rem; font-size: .9375rem; color: #404040; }
+  .jwj-about .checklist svg { width: 1.125rem; height: 1.125rem; stroke: var(--primary); fill: none; stroke-width: 2.5; flex-shrink: 0; margin-top: .15rem; }
+  .jwj-about .grid-3 { display: grid; gap: 1.5rem; }
+  @media (min-width: 640px) {
+  .jwj-about .grid-3 { grid-template-columns: repeat(2, 1fr); }
+  }
+  @media (min-width: 1024px) {
+  .jwj-about .grid-3 { grid-template-columns: repeat(3, 1fr); }
+  }
+  .jwj-about .offer { transition: box-shadow .2s, transform .2s; }
+  .jwj-about .offer:hover { box-shadow: 0 1px 3px #0000001a, 0 8px 24px -6px #0000001a; transform: translateY(-2px); }
+  .jwj-about .offer h3 { font-size: 1.25rem; }
+  .jwj-about .formula { margin-top: 3rem; display: flex; flex-wrap: wrap; justify-content: center; row-gap: .25rem; text-align: center; font-size: .9375rem; color: var(--muted-foreground); }
+  .jwj-about .formula b { color: var(--foreground); font-weight: 600; }
+  .jwj-about .formula i { color: var(--primary); font-style: normal; margin: 0 .35rem; }
+  .jwj-about .diff { text-align: center; max-width: 52rem; margin: 0 auto; }
+  .jwj-about .diff .ask { font-family: var(--font-serif); font-size: 1.5rem; color: #a3a3a3; margin-top: 1.5rem; }
+  .jwj-about .diff .ask s { text-decoration-color: var(--primary); text-decoration-thickness: 2px; }
+  .jwj-about .diff .answer { font-family: var(--font-serif); font-size: 2.25rem; line-height: 1.2; margin-top: 1rem; }
+  .jwj-about .diff .answer em { color: var(--primary); font-style: italic; }
+  .jwj-about .story-lines { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1px; background: rgba(255,255,255,.1); border-radius: 1rem; overflow: hidden; margin-top: 3.5rem; }
+  @media (min-width: 768px) {
+  .jwj-about .story-lines { grid-template-columns: repeat(4, 1fr); }
+  .jwj-about .diff .answer { font-size: 3rem; }
+  }
+  .jwj-about .story-lines div { background: var(--night); padding: 1.5rem 1rem; font-size: .9375rem; color: #d4d4d4; }
+  .jwj-about .story-lines strong { display: block; color: #fff; font-family: var(--font-serif); font-weight: 500; font-size: 1.125rem; margin-bottom: .25rem; }
+  .jwj-about .projects { display: grid; gap: 1.5rem; }
+  @media (min-width: 768px) {
+  .jwj-about .projects { grid-template-columns: repeat(6, 1fr); }
+  .jwj-about .projects .p-lg { grid-column: span 3; }
+  .jwj-about .projects .p-sm { grid-column: span 2; }
+  }
+  .jwj-about .project { position: relative; border-radius: 1rem; padding: 2rem; border: 1px solid var(--border); background: #fff; display: flex; flex-direction: column; min-height: 15rem; }
+  .jwj-about .project.feature { background: var(--night); color: #fff; border-color: var(--night); }
+  .jwj-about .project.feature p { color: #a3a3a3; }
+  .jwj-about .project.cream { background: var(--cream); border-color: var(--cream); }
+  .jwj-about .project .tag { align-self: flex-start; font-size: .75rem; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; color: var(--primary); border: 1px solid currentColor; border-radius: 9999px; padding: .2rem .65rem; }
+  .jwj-about .project h3 { font-family: var(--font-serif); font-weight: 500; font-size: 1.625rem; margin-top: auto; padding-top: 2.5rem; }
+  .jwj-about .project p { color: var(--muted-foreground); margin-top: .625rem; line-height: 1.65; font-size: .9375rem; }
+  .jwj-about .founder-media { position: relative; }
+  .jwj-about .founder-media img { border-radius: 1rem; width: 100%; aspect-ratio: 4/5; object-fit: cover; object-position: center 15%; }
+  .jwj-about .founder-media .badge { position: absolute; right: -0.5rem; bottom: -1.5rem; background: var(--primary); color: #fff; border-radius: 1rem; padding: 1.25rem 1.5rem; max-width: 16rem; box-shadow: 0 20px 40px -15px rgba(0,0,0,.35); }
+  .jwj-about .founder-media .badge strong { font-family: var(--font-serif); font-size: 2.5rem; font-weight: 500; line-height: 1; display: block; }
+  .jwj-about .founder-media .badge span { font-size: .8125rem; opacity: .9; }
+  .jwj-about .role-line { margin-top: .75rem; font-size: .8125rem; font-weight: 600; letter-spacing: .12em; text-transform: uppercase; color: var(--muted-foreground); }
+  .jwj-about .pullquote { border-left: 3px solid var(--primary); padding: .25rem 0 .25rem 1.25rem; margin: 2rem 0; font-family: var(--font-serif); font-size: 1.375rem; line-height: 1.45; font-style: italic; }
+  .jwj-about .roles { display: grid; gap: .75rem; margin-top: 2rem; }
+  .jwj-about .role { display: flex; align-items: center; gap: 1rem; padding: 1rem; border: 1px solid var(--border); border-radius: var(--radius); background: #fff; }
+  .jwj-about .role strong { display: block; font-size: .9375rem; }
+  .jwj-about .role span { font-size: .8125rem; color: var(--muted-foreground); }
+  .jwj-about .role em { margin-left: auto; font-style: normal; font-size: .75rem; font-weight: 600; color: var(--primary); white-space: nowrap; }
+  .jwj-about .stats { display: grid; grid-template-columns: repeat(2, 1fr); gap: 2rem 1.5rem; }
+  @media (min-width: 900px) {
+  .jwj-about .stats { grid-template-columns: repeat(3, 1fr); }
+  }
+  .jwj-about .stat { border-top: 1px solid rgba(255,255,255,.15); padding-top: 1.5rem; }
+  .jwj-about .stat strong { font-family: var(--font-serif); font-weight: 500; font-size: 3.5rem; line-height: 1; color: var(--primary); display: block; }
+  .jwj-about .stat span { display: block; margin-top: .75rem; color: #d4d4d4; font-size: .9375rem; }
+  .jwj-about .timeline { position: relative; list-style: none; margin: 0; padding: 0 0 0 2rem; }
+  .jwj-about .timeline::before { content: ""; position: absolute; left: .4rem; top: .5rem; bottom: .5rem; width: 1px; background: var(--sand); }
+  .jwj-about .timeline li { position: relative; padding-bottom: 2.25rem; }
+  .jwj-about .timeline li:last-child { padding-bottom: 0; }
+  .jwj-about .timeline li::before { content: ""; position: absolute; left: -2rem; top: .35rem; width: .85rem; height: .85rem; border-radius: 9999px; background: #fff; border: 3px solid var(--primary); }
+  .jwj-about .timeline .when { font-size: .8125rem; font-weight: 600; letter-spacing: .08em; color: var(--primary); text-transform: uppercase; }
+  .jwj-about .timeline h3 { font-size: 1.125rem; font-weight: 600; margin-top: .25rem; }
+  .jwj-about .timeline .org { font-family: var(--font-serif); font-style: italic; color: #525252; }
+  .jwj-about .timeline p { color: var(--muted-foreground); margin-top: .5rem; font-size: .9375rem; line-height: 1.65; }
+  .jwj-about .side-stack { display: grid; gap: 1.5rem; align-content: start; }
+  .jwj-about .mini-list { list-style: none; padding: 0; margin: 1rem 0 0; display: grid; gap: .875rem; }
+  .jwj-about .mini-list li { font-size: .9375rem; color: #404040; padding-bottom: .875rem; border-bottom: 1px solid var(--border); }
+  .jwj-about .mini-list li:last-child { border-bottom: 0; padding-bottom: 0; }
+  .jwj-about .mini-list li span { display: block; font-size: .8125rem; color: var(--muted-foreground); }
+  @media (min-width: 1024px) {
+  .jwj-about .journey { grid-template-columns: 1.3fr 1fr; align-items: start; }
+  }
+  .jwj-about .values { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1px; background: var(--border); border: 1px solid var(--border); border-radius: 1rem; overflow: hidden; }
+  @media (min-width: 900px) {
+  .jwj-about .values { grid-template-columns: repeat(5, 1fr); }
+  }
+  .jwj-about .value { background: #fff; padding: 2rem 1.25rem; text-align: center; }
+  .jwj-about .value .icon-badge { margin: 0 auto; }
+  .jwj-about .value h3 { font-size: .875rem; font-weight: 600; letter-spacing: .12em; text-transform: uppercase; margin-top: 1rem; }
+  .jwj-about .value p { font-size: .875rem; color: var(--muted-foreground); margin-top: .5rem; line-height: 1.6; }
+  .jwj-about .value:last-child { grid-column: span 2; }
+  @media (min-width: 900px) {
+  .jwj-about .value:last-child { grid-column: auto; }
+  }
+  .jwj-about .chips { display: grid; gap: 1rem; }
+  @media (min-width: 640px) {
+  .jwj-about .chips { grid-template-columns: repeat(2, 1fr); }
+  }
+  @media (min-width: 1024px) {
+  .jwj-about .chips { grid-template-columns: repeat(3, 1fr); }
+  }
+  .jwj-about .chip { display: flex; gap: 1rem; padding: 1.25rem; border-radius: var(--radius); border: 1px solid var(--border); background: #fff; }
+  .jwj-about .chip strong { display: block; }
+  .jwj-about .chip span { font-size: .875rem; color: var(--muted-foreground); line-height: 1.55; }
+  .jwj-about .podcast { display: grid; gap: 3rem; align-items: center; }
+  @media (min-width: 1024px) {
+  .jwj-about .podcast { grid-template-columns: .8fr 1.2fr; }
+  }
+  .jwj-about .podcast img { border-radius: 1rem; aspect-ratio: 4/5; object-fit: cover; object-position: top; width: 100%; max-width: 26rem; }
+  .jwj-about .listen { display: flex; flex-wrap: wrap; gap: .75rem; margin-top: 2rem; }
+  .jwj-about .listen a { display: inline-flex; align-items: center; gap: .5rem; border: 1px solid rgba(255,255,255,.2); border-radius: 9999px; padding: .6rem 1.1rem; font-size: .875rem; color: #fff; transition: border-color .2s, background .2s; }
+  .jwj-about .listen a:hover { border-color: var(--primary); background: rgba(164,129,55,.15); }
+  .jwj-about .cta { background: var(--cream); border-radius: 1.5rem; padding: 3rem 1.5rem; display: grid; gap: 2.5rem; }
+  @media (min-width: 1024px) {
+  .jwj-about .cta { grid-template-columns: 1fr 1fr; padding: 4rem; align-items: center; }
+  }
+  .jwj-about .cta .checklist li { color: #262626; }
+  .jwj-about .promise { text-align: center; max-width: 46rem; margin: 0 auto; }
+  .jwj-about .promise p.big { font-family: var(--font-serif); font-size: 1.75rem; line-height: 1.4; }
+  .jwj-about .promise p.sig { margin-top: 1.5rem; font-family: var(--font-serif); font-style: italic; font-size: 1.5rem; color: var(--primary); }
+  @media (min-width: 768px) {
+  .jwj-about .h2 { font-size: 3rem; }
+  .jwj-about .section { padding: 7rem 0; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+  .jwj-about * { transition: none !important; scroll-behavior: auto !important; }
+  }
+</style>
