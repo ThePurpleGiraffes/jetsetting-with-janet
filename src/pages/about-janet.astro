@@ -3,7 +3,7 @@
  * About page – Jetsetting with Janet
  * Route: /about-janet  (the site footer already links here)
  *
- * Images: put the 5 WebP files in  src/assets/about/
+ * Images: put the WebP files in  src/assets/about/
  * Layout: uses the site's existing layout so the header and footer stay consistent.
  *         Adjust the import path / props below if your layout file is named differently.
  */
@@ -11,8 +11,8 @@ import { Image } from "astro:assets";
 import MainLayout from "../layouts/Mainlayout.astro";
 
 import portrait from "../assets/about/janet-pillai-portrait.webp";
-import travel from "../assets/about/janet-pillai-travel.webp";
-import closeup from "../assets/about/janet-pillai-closeup.webp";
+import noordhoek from "../assets/about/noordhoek-sunset.webp";
+import tableMountain from "../assets/about/cape-town-table-mountain.webp";
 import blackCoat from "../assets/about/janet-pillai-black-coat.webp";
 import seated from "../assets/about/janet-pillai-seated.webp";
 
@@ -149,12 +149,12 @@ const schema = {
           </div>
         </div>
         <div class="story-media">
-          <Image src={travel} alt="Janet Pillai on the go, wearing sunglasses" widths={[480, 800, 1200]} sizes="(min-width: 1024px) 40vw, 100vw" class="tall" />
+          <Image src={noordhoek} alt="Golden sunset over the wetlands and coastline at Noordhoek, Cape Town" widths={[480, 800, 1200]} sizes="(min-width: 1024px) 40vw, 100vw" class="tall" />
           <div class="note">
             <p>“Wellness is the ultimate destination.”</p>
             <span>The JwJ philosophy</span>
           </div>
-          <Image src={closeup} alt="Close-up portrait of Janet Pillai" widths={[480, 800, 1200]} sizes="(min-width: 1024px) 40vw, 100vw" class="short" />
+          <Image src={tableMountain} alt="Table Mountain at sunset across the ocean, Cape Town" widths={[480, 800, 1200]} sizes="(min-width: 1024px) 40vw, 100vw" class="short" />
         </div>
       </div>
     </section>
@@ -580,11 +580,11 @@ const schema = {
   .jwj-about .pillar span { font-size: .8125rem; color: var(--muted-foreground); }
   .jwj-about .story-media { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
   .jwj-about .story-media img { border-radius: 1rem; width: 100%; height: 100%; object-fit: cover; }
-  .jwj-about .story-media .tall { grid-row: span 2; aspect-ratio: 3/4.4; object-position: top; }
+  .jwj-about .story-media .tall { grid-row: span 2; aspect-ratio: 3/4.4; object-position: center; }
   .jwj-about .story-media .note { background: var(--cream); border-radius: 1rem; padding: 1.5rem; display: flex; flex-direction: column; justify-content: center; }
   .jwj-about .story-media .note p { font-family: var(--font-serif); font-size: 1.25rem; line-height: 1.4; }
   .jwj-about .story-media .note span { margin-top: .75rem; font-size: .75rem; letter-spacing: .1em; text-transform: uppercase; color: var(--primary); font-weight: 600; }
-  .jwj-about .story-media .short { aspect-ratio: 1/1; object-position: center 20%; }
+  .jwj-about .story-media .short { aspect-ratio: 1/1; object-position: center; }
   .jwj-about .vm-grid { display: grid; gap: 1.5rem; }
   @media (min-width: 900px) {
   .jwj-about .vm-grid { grid-template-columns: 1fr 1.4fr; }
