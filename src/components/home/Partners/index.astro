@@ -1,6 +1,12 @@
 ---
 import { Card } from "@/components/ui/card";
 
+// Local partner logos (stored in src/assets/partners/)
+import dilmahLogo from "@/assets/partners/dilmah.webp";
+import wildebraamLogo from "@/assets/partners/wildebraam-berry-estate.webp";
+import darlingSweetLogo from "@/assets/partners/darling-sweet.webp";
+import condeNastLogo from "@/assets/partners/conde-nast.webp";
+
 interface Partner {
     img: string;
     alt: string;
@@ -19,18 +25,21 @@ const partners: Partner[] = [
         img: "https://www.capetown.travel/wp-content/uploads/2022/05/logo-love-ct-blue.svg",
         alt: "Cape Town Tourism",
     },
-
     {
-        img: "https://www.diageo.com/~/media/Images/D/Diageo-V2/Universal/logo/Logo.svg",
-        alt: "Diageo",
+        img: dilmahLogo.src,
+        alt: "Dilmah Tea",
     },
     {
-        img: "https://www.nespresso.com/za/media/logo/stores/2/Nespresso_Wordmark_2021_RGB_Black_2_.png",
-        alt: "Nespresso",
+        img: wildebraamLogo.src,
+        alt: "Wildebraam Berry Estate",
     },
     {
-        img: "https://www.lecreuset.co.za/on/demandware.static/-/Sites/default/dw9efd89cf/images/logo.svg",
-        alt: "Le Creuset",
+        img: darlingSweetLogo.src,
+        alt: "Darling Sweet",
+    },
+    {
+        img: condeNastLogo.src,
+        alt: "Condé Nast",
     },
 ];
 ---
@@ -46,14 +55,16 @@ const partners: Partner[] = [
                 </p>
             </div>
 
-            <div class="grid grid-cols-2 gap-6 md:grid-cols-3 lg:grid-cols-6">
+            <!-- Flex-wrap keeps rows centred, so an odd number of logos never leaves one stranded on the left -->
+            <div class="flex flex-wrap justify-center gap-6">
                 {
                     partners.map((partner) => (
-                        <Card class="flex h-32 items-center justify-center p-6 transition-shadow hover:shadow-md">
+                        <Card class="flex h-32 w-[calc(50%-0.75rem)] items-center justify-center p-6 transition-shadow hover:shadow-md sm:w-36">
                             <img
                                 src={partner.img}
                                 alt={partner.alt}
-                                class="max-h-16 w-auto object-contain  transition hover:grayscale-0"
+                                loading="lazy"
+                                class="max-h-16 w-auto max-w-full object-contain transition hover:grayscale-0"
                             />
                         </Card>
                     ))
